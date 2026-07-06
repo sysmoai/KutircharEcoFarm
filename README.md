@@ -1,79 +1,132 @@
-# Kutirchar EcoFarm — Brand Identity Guide
+# Kutirchar EcoFarm — Full Digital System
 
 **Official English Name:** Kutirchar EcoFarm  
 **Official Bengali Name:** কুটিরচর ইকোফার্ম  
 **Owner / Project Lead:** EMON HOSSAIN  
 **Status:** FINAL / FIXED — 21 June 2026  
 **Location:** Kutirchar, Bhadraghat, Kamarkhanda, Sirajganj, Bangladesh  
-**Website:** kutircharecofarm.com  
+**Website:** kutircharecofarm.com · kutircharecofarm.bd  
+**Contact:** info@kutircharecofarm.com  
 
 ---
 
 ## What This Is
 
-A complete, interactive **Brand Identity Guide** built with React + Tailwind CSS. It serves as the official single source of truth for all brand assets, design tokens, logo usage rules, and AI agent instructions for **Kutirchar EcoFarm** — a smart cattle, biogas, solar, silage, and circular profit ecosystem in rural Bangladesh.
+A **complete digital system** for Kutirchar EcoFarm — combining a full public-facing website (8 pages) with a comprehensive brand identity guide (14 sections) and a complete asset download system. Both are accessible within the same React application.
 
 ---
 
-## 14 Sections
+## System Architecture
 
-| Section | Title | Purpose |
-|---------|-------|---------|
-| 00 | Master Logo Source | Original icon, size previews, icon structure notes |
-| 01 | Logo System | All 10 logo variants (English, bilingual, Bengali-first, icon-only, etc.) |
-| 02 | Logo Lockups | Horizontal, stacked, document header, signboard, premium centered |
-| 03 | Icon System | Full-color, monochrome, white, favicons (16–64px), app icons |
-| 04 | Seal + Stamp System | SVG circular seal with bilingual arc text, bank document mock |
-| 05 | Monochrome + Reverse | All 7 color modes with usage table |
-| 06 | Clear Space & Sizing | Spacing unit X = icon radius, minimum sizes for all contexts |
-| 07 | Color System | 12 brand colors with hex values, usage rules, contrast ratings |
-| 08 | Typography System | English + Bengali type scale, font stack guide |
-| 09 | Usage Examples | Website header, hero, bank report, business card, social, govt letter |
-| 10 | Incorrect Usage | 9 visual wrong-use examples + 18-item prohibition list |
-| 11 | Export Assets | Full export spec (SVG, PNG, favicon, social, documents) |
-| 12 | Developer Notes | Owner, location, sub-brands, phase system, design tokens |
-| 13 | AI Agent Tokens | **Copyable JSON brand tokens for AI agents** + image prompt templates |
+```
+/ (Home)                    ← Website: 8 pages
+├── /project                ← The Project Overview
+├── /proof                  ← Proof & Governance (bank-ready)
+├── /ecosystem              ← Circular Ecosystem
+├── /products               ← Products & Services (phase-gated)
+├── /digital                ← Digital Infrastructure
+├── /updates                ← Updates / Reports
+├── /contact                ← Contact & Partnership
+│
+└── /brand-guide            ← Brand Identity Guide: 14 sections
+    ├── 00 Master Logo Source
+    ├── 01 Logo System
+    ├── 02 Logo Lockups
+    ├── 03 Icon System
+    ├── 04 Seal + Stamp System
+    ├── 05 Monochrome + Reverse
+    ├── 06 Clear Space & Sizing
+    ├── 07 Color System
+    ├── 08 Typography System
+    ├── 09 Usage Examples
+    ├── 10 Incorrect Usage
+    ├── 11 Export Assets ← 43 download buttons
+    ├── 12 Developer Notes
+    └── 13 AI Agent Tokens
+```
 
 ---
 
 ## Quick Start
 
 ```bash
-# Install dependencies
 pnpm install
-
-# Start development server (Vite)
 pnpm run dev
 ```
 
-> **Note:** This project uses pnpm. Do not use npm or yarn.
+> Uses pnpm. Do not use npm or yarn.
 
 ---
 
-## Tech Stack
+## The Website — 8 Pages
 
-- **React 18** + TypeScript
-- **Tailwind CSS v4** (via @tailwindcss/vite)
-- **Vite 6**
-- **Google Fonts:** Playfair Display, Inter, Manrope, Noto Sans Bengali, Noto Serif Bengali
+| Page | Route | Purpose |
+|------|-------|---------|
+| **Home** | `/` | Hero, trust strip, ecosystem preview, partnership CTA |
+| **Project** | `/project` | What/why, phases 0–5 roadmap, location, governance |
+| **Proof & Governance** | `/proof` | Audit ledger, stop rules, Zone A/B explained, evidence pack |
+| **Ecosystem** | `/ecosystem` | Circular flow: cattle→biogas→slurry→fodder→cattle loop |
+| **Products & Services** | `/products` | Phase-gated: Now / Next / Later — no over-promise |
+| **Digital Infrastructure** | `/digital` | Starlink, CCTV, UPS — with verification gates |
+| **Updates / Reports** | `/updates` | Filterable trust reports with evidence + open gaps |
+| **Contact** | `/contact` | Inquiry form (validation + success/error), WhatsApp, email |
+
+### Key website features
+- Evidence-first language — no hype, no fake numbers
+- Phase labels (Now / Next / Later) on every product/service
+- Stop rules in red callouts where verification is required
+- Contact form with validation, success state, mailto fallback
+- Bilingual (Bengali + English) throughout
+- Mobile responsive with hamburger menu
+- Sticky navbar, smooth scroll-to-top on navigation
 
 ---
 
-## Brand Token JSON (for AI Agents)
+## The Brand Guide — 14 Sections at `/brand-guide`
 
-Navigate to **Section 13 — AI Agent Tokens** in the app and click **"Copy JSON"** to get the complete machine-readable brand token object. Paste it into any AI system prompt to ensure on-brand output.
+Navigate to `/brand-guide` from the navbar ("🎨 Brand Guide" button) or homepage.
 
-The JSON includes:
-- Official names (English + Bengali)
-- All 12 brand color hex codes
-- Typography font stack
-- 6 sub-brand names
-- Phase labels (NOW / NEXT / LATER)
-- Content rules
-- Forbidden name variants
-- Contact + location data
+| Section | Content |
+|---------|---------|
+| 00 | Master logo source, icon anatomy, size previews |
+| 01 | Complete logo system — 10 variants |
+| 02 | Logo lockups — horizontal, stacked, signboard |
+| 03 | Icon system — all modes, favicon to app icon |
+| 04 | Seal + stamp — expert proportions, Playfair Display arc |
+| 05 | Monochrome + reverse — all 7 color modes |
+| 06 | Clear space + sizing rules |
+| 07 | Color system — 12 brand tokens |
+| 08 | Typography — English + Bengali paired scale |
+| 09 | Usage examples — website, bank doc, business card |
+| 10 | Incorrect usage — 9 visual examples + 18 rules |
+| 11 | **Export Assets** — 43 download buttons |
+| 12 | Developer notes — owner, location, sub-brands, phase system |
+| 13 | AI Agent Tokens — copyable JSON for all AI tools |
+
+---
+
+## Asset Downloads — Section 11
+
+Direct link: `/brand-guide?section=11`
+
+| Category | Files |
+|----------|-------|
+| **Icon Pack** | Full color, Black, White, Dark Green, Watermark at 8 sizes (16–1024px) |
+| **Logo Lockups** | 15 variants: English/Bilingual/Bengali-First × Horizontal/Stacked × Color/Black/White |
+| **Seal / Stamp** | 4 modes × SVG + PNG at 200/400/800/1200px |
+| **Favicon Pack** | 16, 32, 48, 64, 96, 128, 180, 512px |
+| **Social Media** | YouTube, Facebook, Instagram, Twitter/X, LinkedIn, WhatsApp, TikTok, Telegram — all platform sizes |
+| **Watermark** | 10% opacity logo at 128–1024px for document backgrounds |
+
+---
+
+## AI Agent Tokens — Section 13
+
+Navigate to `/brand-guide?section=13` for the copyable JSON brand token object.
 
 Compatible with: **Claude, GPT-4, Gemini, Midjourney, DALL-E, Stable Diffusion, Adobe Firefly, Ideogram, Canva AI**
+
+The JSON includes: official names (both languages) · all 12 color hex codes · typography font stack · 6 sub-brand names · phase labels · content rules · forbidden name variants · social media image sizes · logo minimum sizes.
 
 ---
 
@@ -81,22 +134,20 @@ Compatible with: **Claude, GPT-4, Gemini, Midjourney, DALL-E, Stable Diffusion, 
 
 | Rule | Value |
 |------|-------|
-| Official English name | `Kutirchar EcoFarm` (one word each) |
+| Official English name | `Kutirchar EcoFarm` — never split |
 | Official Bengali name | `কুটিরচর ইকোফার্ম` |
-| Primary color | `#1F6B3A` Kutirchar Green |
-| Background | `#FAF7EF` Document Ivory |
-| Primary font | Playfair Display (English wordmark) |
-| Bengali font | Noto Sans Bengali |
+| Primary brand color | `#1F6B3A` Kutirchar Green |
+| Page background | `#FAF7EF` Document Ivory |
+| English wordmark font | Playfair Display 600 |
+| Bengali font | Noto Sans Bengali 500 |
 | Tone | Evidence-first · Auditor · No hype |
 | Tagline | Smart Cattle & Circular Energy Ecosystem |
 
-**Never write:** Kutir Char, Eco Farm, Kutirchar Smart Farm, Prangan Farm, or Emon Farm.
+**Never write:** Kutir Char, Eco Farm, Kutirchar Smart Farm, Prangan Farm, Emon Farm
 
 ---
 
 ## Sub-Brand Naming
-
-All future modules follow this pattern:
 
 - Kutirchar EcoFarm **Dairy**
 - Kutirchar EcoFarm **Energy**
@@ -107,46 +158,61 @@ All future modules follow this pattern:
 
 ---
 
+## Tech Stack
+
+- **React 18** + TypeScript
+- **React Router v7** (`createBrowserRouter` / `RouterProvider`)
+- **Tailwind CSS v4** (via @tailwindcss/vite)
+- **Vite 6**
+- **Google Fonts:** Playfair Display, Inter, Manrope, Noto Sans Bengali, Noto Serif Bengali
+
+---
+
 ## File Structure
 
 ```
 src/
 ├── app/
-│   ├── App.tsx                    # Main app + sidebar navigation
-│   └── components/
-│       ├── BrandLogo.tsx          # Reusable logo component (all variants/modes)
-│       ├── SealLogo.tsx           # SVG circular seal component
-│       └── sections/
-│           ├── Section00MasterLogo.tsx
-│           ├── Section01LogoSystem.tsx
-│           ├── Section02LogoLockups.tsx
-│           ├── Section03IconSystem.tsx
-│           ├── Section04SealSystem.tsx
-│           ├── Section05Monochrome.tsx
-│           ├── Section06ClearSpace.tsx
-│           ├── Section07ColorSystem.tsx
-│           ├── Section08Typography.tsx
-│           ├── Section09UsageExamples.tsx
-│           ├── Section10IncorrectUsage.tsx
-│           ├── Section11ExportAssets.tsx
-│           ├── Section12DeveloperNotes.tsx
-│           └── Section13AIAgentTokens.tsx   # AI agent JSON tokens
+│   ├── App.tsx                         # RouterProvider entry
+│   ├── routes.tsx                      # All routes (website + brand guide)
+│   ├── brand.ts                        # Single source of truth: colors, fonts, contact
+│   ├── components/
+│   │   ├── layout/
+│   │   │   └── Root.tsx                # Navbar + Footer + mobile menu
+│   │   ├── pages/
+│   │   │   ├── HomePage.tsx
+│   │   │   ├── ProjectPage.tsx
+│   │   │   ├── ProofPage.tsx
+│   │   │   ├── ProductsPage.tsx
+│   │   │   ├── EcosystemPage.tsx
+│   │   │   ├── DigitalPage.tsx
+│   │   │   ├── UpdatesPage.tsx
+│   │   │   ├── ContactPage.tsx
+│   │   │   ├── BrandGuidePage.tsx      # Brand guide with sidebar (sections 00–13)
+│   │   │   └── NotFound.tsx
+│   │   ├── sections/
+│   │   │   ├── Section00MasterLogo.tsx
+│   │   │   ├── ...                     # Sections 01–12
+│   │   │   └── Section13AIAgentTokens.tsx
+│   │   └── shared/
+│   │       ├── PhaseChip.tsx           # Now / Next / Later badges
+│   │       └── Shared.tsx              # PageSection, Card, StopRule, CtaButton...
 ├── imports/
-│   └── image.png                  # Master logo icon (DO NOT MODIFY)
+│   └── image.png                       # Master logo (486KB) — DO NOT MODIFY
 └── styles/
-    ├── fonts.css                  # Google Fonts imports
-    ├── theme.css                  # Design tokens
-    └── globals.css
+    ├── fonts.css                       # Google Fonts
+    ├── globals.css                     # Base resets
+    └── theme.css                       # Design tokens
 ```
 
 ---
 
 ## GitHub Usage Notes
 
-- The `src/imports/image.png` is the **master logo icon** — commit it as-is
-- Do not commit `node_modules/`, `.env`, or any private documents
-- The `__figma__entrypoint__.ts` file is auto-generated by Figma Make — do not modify
-- For production build: `pnpm run build` (outputs to `dist/`)
+- `src/imports/image.png` is the master logo — commit as-is
+- Never commit: `node_modules/`, `.env`, `private-docs/`, `nid/`, `legal-private/`
+- No NID, PIN, bank account numbers, or sensitive identifiers ever in this repo
+- The `__figma__entrypoint__.ts` is auto-generated — do not modify
 
 ---
 
@@ -156,4 +222,4 @@ src/
 **Decision locked:** 21 June 2026  
 **Contact:** info@kutircharecofarm.com  
 
-This brand identity guide is the official reference for all Kutirchar EcoFarm communications. The master logo icon is locked — it must not be modified, recreated, or replaced without formal brand review.
+This brand and website system is the official reference for all Kutirchar EcoFarm communications. The master logo icon is locked — it must not be modified without formal brand review.

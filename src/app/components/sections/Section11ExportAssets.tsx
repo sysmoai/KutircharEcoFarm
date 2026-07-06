@@ -80,9 +80,9 @@ async function dlBannerPNG(w: number, h: number, filename: string, opts: BannerO
 
   if (opts.layout === "center") {
     const ix = (w - iconSize) / 2;
-    const iy = opts.showTagline || opts.showBengali
-      ? h * 0.12
-      : (h - iconSize) / 2 - (opts.showBengali ? h * 0.08 : 0);
+    // When there is text below the icon, push icon up to 12% from top.
+    // Otherwise centre the icon vertically.
+    const iy = (opts.showTagline || opts.showBengali) ? h * 0.12 : (h - iconSize) / 2;
     if (iconFilter) ctx.filter = iconFilter;
     ctx.drawImage(img, ix, iy, iconSize, iconSize);
     ctx.filter = "none";
@@ -171,9 +171,9 @@ async function dlLockup(
   const ctx = c.getContext("2d")!;
   ctx.scale(scale, scale);
 
-  const bg = mode === "white" ? "#0B4F2A" : "#FAF7EF";
-  const tc = mode === "white" ? "#FFFFFF" : mode === "black" ? "#000000" : "#1F6B3A";
-  const sc = mode === "white" ? "rgba(255,255,255,0.75)" : "#4F9A3D";
+  const bg  = mode === "white" ? "#0B4F2A" : "#FAF7EF";
+  const tc  = mode === "white" ? "#FFFFFF" : mode === "black" ? "#000000" : "#1F6B3A";
+  // sc was previously used for secondary text but all text now uses tc (equal standing).
   const flt = FILTERS[mode === "color" ? "color" : mode];
 
   ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
@@ -189,37 +189,60 @@ async function dlLockup(
   }
 
   if (stacked) {
+    // ── Icon centred near top ─────────────────────────────────────────────
     const is = 150; const ix = (W - is) / 2;
     if (flt) ctx.filter = flt;
-    ctx.drawImage(img, ix, 24, is, is);
+    ctx.drawImage(img, ix, 24, is, is);    // icon: y=24 → 174
     ctx.filter = "none"; ctx.textAlign = "center";
-    // Both names SAME size — expert bilingual match
-    ctx.fillStyle = tc;
-    ctx.font = `600 30px "Playfair Display", Georgia, serif`;
-    ctx.fillText("Kutirchar EcoFarm", W / 2, 230);
+
     if (type === "stacked-bi") {
-      drawSep(W * 0.25, W * 0.75, 248);        // thin separator line
-      ctx.fillStyle = tc;                        // same color — equal standing
-      ctx.font = `500 30px "Noto Sans Bengali", sans-serif`;  // SAME 30px
-      ctx.fillText("কুটিরচর ইকোফার্ম", W / 2, 282);
+      // Bilingual: vertically centre the full text block in the space below icon.
+      // Text block height ≈ 30*1.15 + (30*0.055*2+1) + 30*1.45 = 34.5+4.3+43.5 = 82.3px
+      // Space below icon: 420-174 = 246px → start = 174 + (246-82.3)/2 = 255.8
+      // English baseline = 255.8 + 30*0.73 = 277.7 ≈ 278
+      ctx.fillStyle = tc;
+      ctx.font = `600 30px "Playfair Display", Georgia, serif`;
+      ctx.fillText("Kutirchar EcoFarm", W / 2, 278);
+      drawSep(W * 0.22, W * 0.78, 285);          // separator at 278+30*0.2+1.65 = 285
+      ctx.fillStyle = tc;
+      ctx.font = `500 30px "Noto Sans Bengali", sans-serif`;
+      ctx.fillText("কুটিরচর ইকোফার্ম", W / 2, 310);  // 285+1+1.65+30*0.73 = 310
+    } else {
+      // English only: centre single text block in space below icon.
+      // Block height ≈ 30*1.15 = 34.5px → start = 174 + (246-34.5)/2 = 279.75
+      // English baseline = 279.75 + 30*0.73 = 301.7 ≈ 302
+      ctx.fillStyle = tc;
+      ctx.font = `600 30px "Playfair Display", Georgia, serif`;
+      ctx.fillText("Kutirchar EcoFarm", W / 2, 302);
     }
   } else {
+    // ── Horizontal: icon left, text right ────────────────────────────────
     const is = 110; const iy = (H - is) / 2;
     if (flt) ctx.filter = flt;
     ctx.drawImage(img, 36, iy, is, is);
     ctx.filter = "none"; ctx.textAlign = "left";
+
     if (type === "bilingual") {
-      // Both at 36px — 100% equal size match
-      ctx.fillStyle = tc; ctx.font = `600 36px "Playfair Display", Georgia, serif`; ctx.fillText("Kutirchar EcoFarm", 176, 75);
-      drawSep(176, W - 36, 90);                 // separator between names
-      ctx.fillStyle = tc; ctx.font = `500 36px "Noto Sans Bengali", sans-serif`;    ctx.fillText("কুটিরচর ইকোফার্ম", 176, 132);
+      // Both at 36px — 100% equal size. Positions calibrated so the gap
+      // between names (via separator) matches BrandLogo proportions.
+      ctx.fillStyle = tc; ctx.font = `600 36px "Playfair Display", Georgia, serif`;
+      ctx.fillText("Kutirchar EcoFarm", 176, 75);
+      drawSep(176, W - 36, 90);              // gap: eng_bottom(82) → sep(90) = 8px ✓
+      ctx.fillStyle = tc; ctx.font = `500 36px "Noto Sans Bengali", sans-serif`;
+      ctx.fillText("কুটিরচর ইকোফার্ম", 176, 120); // sep(91)→ben_top(120-26=94) = 3px ✓
+
     } else if (type === "bengali-first") {
       // Bengali first — both at 34px equal size
-      ctx.fillStyle = tc; ctx.font = `600 34px "Noto Sans Bengali", sans-serif`;    ctx.fillText("কুটিরচর ইকোফার্ম", 176, 74);
-      drawSep(176, W - 36, 89);
-      ctx.fillStyle = tc; ctx.font = `500 34px "Playfair Display", Georgia, serif`; ctx.fillText("Kutirchar EcoFarm", 176, 130);
+      ctx.fillStyle = tc; ctx.font = `600 34px "Noto Sans Bengali", sans-serif`;
+      ctx.fillText("কুটিরচর ইকোফার্ম", 176, 74);
+      drawSep(176, W - 36, 89);             // gap: ben_bottom(81)→sep(89) = 8px ✓
+      ctx.fillStyle = tc; ctx.font = `500 34px "Playfair Display", Georgia, serif`;
+      ctx.fillText("Kutirchar EcoFarm", 176, 117); // sep(90)→eng_top(117-25=92)= 2px ✓
+
     } else {
-      ctx.fillStyle = tc; ctx.font = `600 42px "Playfair Display", Georgia, serif`; ctx.fillText("Kutirchar EcoFarm", 176, 97);
+      // English only — vertically centre in H=170
+      ctx.fillStyle = tc; ctx.font = `600 42px "Playfair Display", Georgia, serif`;
+      ctx.fillText("Kutirchar EcoFarm", 176, 97);  // centred: 97 ≈ H/2 + 42*0.73/2
     }
   }
   await save(c, filename);
@@ -345,8 +368,8 @@ export function Section11ExportAssets() {
   }
 
   const DARK_BANNER: BannerOpts = { bgColor: "#0B4F2A", iconFilter: FILTERS.white, textColor: "#FFFFFF", subColor: "rgba(255,255,255,0.75)", layout: "center", showBengali: true, showTagline: true };
-  const DARK_WIDE: BannerOpts = { bgColor: "#0B4F2A", iconFilter: FILTERS.white, textColor: "#FFFFFF", subColor: "rgba(255,255,255,0.72)", layout: "left", showBengali: true, showTagline: true };
-  const IVORY_BANNER: BannerOpts = { bgColor: "#FAF7EF", iconFilter: undefined, textColor: "#1F6B3A", subColor: "#4F9A3D", layout: "center", showBengali: true };
+  const DARK_WIDE:   BannerOpts = { bgColor: "#0B4F2A", iconFilter: FILTERS.white, textColor: "#FFFFFF", subColor: "rgba(255,255,255,0.72)", layout: "left",   showBengali: true, showTagline: true };
+  const IVORY_BANNER:BannerOpts = { bgColor: "#FAF7EF", iconFilter: undefined,    textColor: "#1F6B3A", subColor: "#4F9A3D",                  layout: "center", showBengali: true, showTagline: true };
 
   const tabs: { id: Tab; label: string }[] = [
     { id: "social",  label: "Social Media" },
@@ -521,15 +544,23 @@ export function Section11ExportAssets() {
           <p style={{ fontFamily: "'Inter',sans-serif", fontSize: 12, color: "#666", marginBottom: 16 }}>Rendered with Playfair Display (English) + Noto Sans Bengali. Exported @2x for retina quality.</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {([
-              { id:"lu-en-col",  t:"english",       m:"color", f:"kutirchar-ecofarm-logo-english.png",            l:"Horizontal — English (Color)" },
-              { id:"lu-bi-col",  t:"bilingual",     m:"color", f:"kutirchar-ecofarm-logo-bilingual.png",          l:"Horizontal — Bilingual (Color)" },
-              { id:"lu-bn-col",  t:"bengali-first", m:"color", f:"kutirchar-ecofarm-logo-bengali-first.png",      l:"Horizontal — Bengali-First (Color)" },
-              { id:"lu-en-blk",  t:"english",       m:"black", f:"kutirchar-ecofarm-logo-english-black.png",      l:"Horizontal — English (Black)" },
-              { id:"lu-bi-blk",  t:"bilingual",     m:"black", f:"kutirchar-ecofarm-logo-bilingual-black.png",    l:"Horizontal — Bilingual (Black)" },
-              { id:"lu-bi-wht",  t:"bilingual",     m:"white", f:"kutirchar-ecofarm-logo-bilingual-white.png",    l:"Horizontal — Bilingual (White on Green)" },
-              { id:"lu-st-col",  t:"stacked-en",    m:"color", f:"kutirchar-ecofarm-logo-stacked-english.png",    l:"Stacked — English (Color)" },
-              { id:"lu-st-bi",   t:"stacked-bi",    m:"color", f:"kutirchar-ecofarm-logo-stacked-bilingual.png",  l:"Stacked — Bilingual (Color)" },
-              { id:"lu-st-wht",  t:"stacked-bi",    m:"white", f:"kutirchar-ecofarm-logo-stacked-white.png",      l:"Stacked — Bilingual (White on Green)" },
+              // ── Horizontal lockups ──────────────────────────────────────────
+              { id:"lu-en-col",  t:"english",       m:"color", f:"kutirchar-ecofarm-logo-english.png",               l:"Horizontal — English (Color)" },
+              { id:"lu-en-blk",  t:"english",       m:"black", f:"kutirchar-ecofarm-logo-english-black.png",          l:"Horizontal — English (Black)" },
+              { id:"lu-en-wht",  t:"english",       m:"white", f:"kutirchar-ecofarm-logo-english-white.png",          l:"Horizontal — English (White on Green)" },
+              { id:"lu-bi-col",  t:"bilingual",     m:"color", f:"kutirchar-ecofarm-logo-bilingual.png",              l:"Horizontal — Bilingual (Color)" },
+              { id:"lu-bi-blk",  t:"bilingual",     m:"black", f:"kutirchar-ecofarm-logo-bilingual-black.png",        l:"Horizontal — Bilingual (Black)" },
+              { id:"lu-bi-wht",  t:"bilingual",     m:"white", f:"kutirchar-ecofarm-logo-bilingual-white.png",        l:"Horizontal — Bilingual (White on Green)" },
+              { id:"lu-bn-col",  t:"bengali-first", m:"color", f:"kutirchar-ecofarm-logo-bengali-first.png",          l:"Horizontal — Bengali-First (Color)" },
+              { id:"lu-bn-blk",  t:"bengali-first", m:"black", f:"kutirchar-ecofarm-logo-bengali-first-black.png",    l:"Horizontal — Bengali-First (Black)" },
+              { id:"lu-bn-wht",  t:"bengali-first", m:"white", f:"kutirchar-ecofarm-logo-bengali-first-white.png",    l:"Horizontal — Bengali-First (White on Green)" },
+              // ── Stacked lockups ─────────────────────────────────────────────
+              { id:"lu-st-col",  t:"stacked-en",    m:"color", f:"kutirchar-ecofarm-logo-stacked-english.png",        l:"Stacked — English (Color)" },
+              { id:"lu-st-blk",  t:"stacked-en",    m:"black", f:"kutirchar-ecofarm-logo-stacked-english-black.png",  l:"Stacked — English (Black)" },
+              { id:"lu-st-ewht", t:"stacked-en",    m:"white", f:"kutirchar-ecofarm-logo-stacked-english-white.png",  l:"Stacked — English (White on Green)" },
+              { id:"lu-st-bi",   t:"stacked-bi",    m:"color", f:"kutirchar-ecofarm-logo-stacked-bilingual.png",      l:"Stacked — Bilingual (Color)" },
+              { id:"lu-st-bblk", t:"stacked-bi",    m:"black", f:"kutirchar-ecofarm-logo-stacked-bilingual-black.png",l:"Stacked — Bilingual (Black)" },
+              { id:"lu-st-wht",  t:"stacked-bi",    m:"white", f:"kutirchar-ecofarm-logo-stacked-bilingual-white.png",l:"Stacked — Bilingual (White on Green)" },
             ] as const).map(item => (
               <div key={item.id} className="flex items-center justify-between gap-3 p-3 rounded-lg" style={{ background:"#f7fbf8", border:"1px solid #e0eed5" }}>
                 <div>
@@ -539,6 +570,27 @@ export function Section11ExportAssets() {
                 <Btn id={item.id} fn={() => dlLockup(item.t as any, item.m as any, item.f)} />
               </div>
             ))}
+          </div>
+          {/* Download All Lockups */}
+          <div style={{ borderTop: "1px solid #e0eed5", marginTop: 16, paddingTop: 16, display: "flex", gap: 8, flexWrap: "wrap" as const }}>
+            <Btn id="lu-all-color" label="↓ All Color Lockups (5 files)" wide fn={async () => {
+              const batch = [
+                { t:"english" as const,       m:"color" as const, f:"kutirchar-ecofarm-logo-english.png" },
+                { t:"bilingual" as const,     m:"color" as const, f:"kutirchar-ecofarm-logo-bilingual.png" },
+                { t:"bengali-first" as const, m:"color" as const, f:"kutirchar-ecofarm-logo-bengali-first.png" },
+                { t:"stacked-en" as const,    m:"color" as const, f:"kutirchar-ecofarm-logo-stacked-english.png" },
+                { t:"stacked-bi" as const,    m:"color" as const, f:"kutirchar-ecofarm-logo-stacked-bilingual.png" },
+              ];
+              for (const { t, m, f } of batch) { await dlLockup(t, m, f); await new Promise(r => setTimeout(r, 300)); }
+            }} />
+            <Btn id="lu-all-white" label="↓ All White (Green bg) Lockups" wide fn={async () => {
+              const batch = [
+                { t:"english" as const,    m:"white" as const, f:"kutirchar-ecofarm-logo-english-white.png" },
+                { t:"bilingual" as const,  m:"white" as const, f:"kutirchar-ecofarm-logo-bilingual-white.png" },
+                { t:"stacked-bi" as const, m:"white" as const, f:"kutirchar-ecofarm-logo-stacked-bilingual-white.png" },
+              ];
+              for (const { t, m, f } of batch) { await dlLockup(t, m, f); await new Promise(r => setTimeout(r, 300)); }
+            }} />
           </div>
         </Card>
       )}

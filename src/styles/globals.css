@@ -1,0 +1,25 @@
+/* Global resets and base styles for Kutirchar EcoFarm website */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  font-family: 'Inter', 'Manrope', sans-serif;
+  background: #FAF7EF;
+  color: #1E2420;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid #F2B544;
+  outline-offset: 2px;
+}
+input, select, textarea, button { font-family: inherit; }
+input:focus, select:focus, textarea:focus {
+  border-color: #1F6B3A !important;
+  box-shadow: 0 0 0 3px rgba(31,107,58,0.12);
+}
+@media (max-width: 768px) {
+  .desktop-only { display: none !important; }
+}
+@media (min-width: 769px) {
+  .mobile-only { display: none !important; }
+}
