@@ -1,4 +1,5 @@
 import logoIcon from "../../imports/image.png";
+import { BRAND } from "../brand";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -35,38 +36,19 @@ export function SealLogo({ size = 240, mode = "color", background }: SealLogoPro
   const cy = size / 2;
 
   // ── Expert Proportions ────────────────────────────────────────────────────
-  //
-  //  Zone map (from outside in):
-  //
-  //  [canvas edge]
-  //    3px margin
-  //  [outerR]      ← thick outer ring stroke
-  //  [outerR2]     ← thin inner band line (creates double-ring effect)
-  //    text zone
-  //  [textR]       ← center of arc text
-  //    text zone
-  //  [innerRing]   ← inner separator ring + bg fill
-  //    icon field  ← logo fills this area edge-to-edge
-  //  [center]
-  //
-  //  Icon PNG: the circular logo occupies ≈ 92% of the PNG width.
-  //  We size iconW so that the logo circle fills the inner field:
-  //    logo_radius = iconW × 0.46  ≈  innerRing_clip_radius
-  //    → iconW = innerRing × 2 / 0.92  (see below)
-
   const outerR    = size * 0.484;  // outer ring boundary
   const outerR2   = size * 0.460;  // thin inner band (double-ring)
-  const textR     = size * 0.400;  // arc text center line
   const innerRing = size * 0.336;  // inner separator ring
 
-  // iconW is calculated so the logo circle fills the clip area:
-  //   logo radius ≈ iconW × 0.46
-  //   clip radius = innerRing - outerStrokeHalf ≈ innerRing - 0.004 × size
-  //   → iconW × 0.46 = innerRing - 0.004 × size
-  //   → iconW = (innerRing - 0.004 × size) / 0.46
-  const iconClipR = innerRing - size * 0.004;
-  // logo circle occupies ≈ 92% of PNG width → logo radius = iconW × 0.46
-  // Set logo radius = iconClipR → iconW = iconClipR / 0.46
+  // ── Matra Pivot Radius (Critical) ─────────────────────────────────────────
+  // English text (top) draws up and out from this radius.
+  // Bengali text (bottom) draws down and out from this radius (using dominantBaseline="hanging").
+  // This locks the Bengali matra exactly to the curve without crushing it.
+  const textPivotR  = size * 0.376;
+  const dotDist   = size * 0.398;  // visual center of the text band
+
+  // iconW is calculated so the logo circle fills the clip area.
+  const iconClipR = innerRing - size * 0.015;
   const iconW     = iconClipR / 0.46;
   const iconX     = cx - iconW / 2;
   const iconY     = cy - iconW / 2;
@@ -77,33 +59,25 @@ export function SealLogo({ size = 240, mode = "color", background }: SealLogoPro
   const innerStroke  = size * 0.008;  // inner separator ring
 
   // ── Typography ────────────────────────────────────────────────────────────
-  // Text band width: outerR2 – innerRing = 0.460 – 0.336 = 0.124 × size
-  // Font needs to sit centred on textR with ≥ 1.5 × fontHeight of clearance.
-  // English uppercase ascenders ≈ 72% of cap-height.
-  // Bengali characters ≈ comparable height.
-  // Both fonts are set so their cap-height ≈ 65% of the text band width.
-
-  const engFontSize  = size * 0.0610;  // cap-height ≈ 0.044 × size
-  const benFontSize  = size * 0.0530;  // matches band proportionally
-  const engSpacing   = size * 0.0175;  // generous tracked capitals
-  const benSpacing   = size * 0.0110;  // Bengali benefits from slightly wider spacing
+  const engFontSize  = size * 0.0610;
+  const benFontSize  = size * 0.0680;  // +11% optical boost restored to match English visual bulk
+  const engSpacing   = size * 0.0175;
+  const benSpacing   = 0;              // ZERO tracking for Bengali to prevent broken conjuncts/matras
 
   // ── Separator dots ────────────────────────────────────────────────────────
-  // Placed at 3 o'clock (cx+textR, cy) and 9 o'clock (cx−textR, cy)
-  // on the text arc radius, dividing the top arc from the bottom arc.
   const dotR = size * 0.0220;
 
-  // ── SVG IDs (unique per size+mode) ───────────────────────────────────────
+  // ── SVG IDs ──────────────────────────────────────────────────────────────
   const uid    = `${size}-${mode}`;
   const topId  = `t${uid}`;
   const botId  = `b${uid}`;
   const clipId = `c${uid}`;
 
   // ── Arc paths ─────────────────────────────────────────────────────────────
-  // Top  : clockwise   9→12→3   text reads L→R at the top  ✓
-  // Bottom: counter-CW 9→6→3   at 6 o'clock direction is →  text reads L→R ✓
-  const topArc = `M ${cx - textR},${cy} A ${textR},${textR} 0 0,1 ${cx + textR},${cy}`;
-  const botArc = `M ${cx - textR},${cy} A ${textR},${textR} 0 0,0 ${cx + textR},${cy}`;
+  // Top:  clockwise from left to right
+  // Bottom: counter-clockwise from left to right
+  const topArc = `M ${cx - textPivotR},${cy} A ${textPivotR},${textPivotR} 0 0,1 ${cx + textPivotR},${cy}`;
+  const botArc = `M ${cx - textPivotR},${cy} A ${textPivotR},${textPivotR} 0 0,0 ${cx + textPivotR},${cy}`;
 
   return (
     <svg
@@ -112,7 +86,7 @@ export function SealLogo({ size = 240, mode = "color", background }: SealLogoPro
       viewBox={`0 0 ${size} ${size}`}
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      aria-label="Kutirchar EcoFarm official seal — কুটিরচর ইকোফার্ম"
+      aria-label={`${BRAND.nameEn} official seal — ${BRAND.nameBn}`}
     >
       <defs>
         <path id={topId} d={topArc} />
@@ -142,33 +116,36 @@ export function SealLogo({ size = 240, mode = "color", background }: SealLogoPro
         strokeWidth={band2Stroke}
       />
 
-      {/* Layer 4 ── Separator dots at 9 o'clock and 3 o'clock */}
-      <circle cx={cx - textR} cy={cy} r={dotR} fill={sc.stroke} />
-      <circle cx={cx + textR} cy={cy} r={dotR} fill={sc.stroke} />
+      {/* Layer 4 ── Separator dots */}
+      <circle cx={cx - dotDist} cy={cy} r={dotR} fill={sc.stroke} />
+      <circle cx={cx + dotDist} cy={cy} r={dotR} fill={sc.stroke} />
 
-      {/* Layer 5 ── English top arc: KUTIRCHAR ECOFARM */}
+      {/* Layer 5 ── English top arc */}
       <text
         fontFamily="'Playfair Display', Georgia, 'Times New Roman', serif"
         fontSize={engFontSize}
         fontWeight="700"
         fill={sc.text}
         letterSpacing={engSpacing}
+        textRendering="geometricPrecision"
       >
         <textPath href={`#${topId}`} startOffset="50%" textAnchor="middle">
-          KUTIRCHAR ECOFARM
+          {BRAND.nameEn.toUpperCase()}
         </textPath>
       </text>
 
-      {/* Layer 6 ── Bengali bottom arc: কুটিরচর ইকোফার্ম */}
+      {/* Layer 6 ── Bengali bottom arc */}
       <text
-        fontFamily="'Noto Sans Bengali', 'Noto Serif Bengali', sans-serif"
+        fontFamily="'Noto Serif Bengali', Georgia, 'Times New Roman', serif"
         fontSize={benFontSize}
         fontWeight="600"
         fill={sc.text}
         letterSpacing={benSpacing}
+        textRendering="geometricPrecision"
+        dominantBaseline="hanging"
       >
         <textPath href={`#${botId}`} startOffset="50%" textAnchor="middle">
-          কুটিরচর ইকোফার্ম
+          {BRAND.nameBn}
         </textPath>
       </text>
 

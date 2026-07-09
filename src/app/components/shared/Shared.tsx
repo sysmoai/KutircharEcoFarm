@@ -27,13 +27,13 @@ export function PageHero({ title, titleBn, subtitle, children, dark }: {
     }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
         {titleBn && (
-          <p style={{ fontFamily: FONTS.bengali, fontSize: 14, color: "rgba(255,255,255,0.65)", marginBottom: 6 }}>{titleBn}</p>
+          <p style={{ fontFamily: FONTS.serifBengali, fontWeight: 500, fontSize: 16, color: "rgba(255,255,255,0.9)", marginBottom: 6, lineHeight: 1.4 }}>{titleBn}</p>
         )}
         <h1 style={{ fontFamily: FONTS.serif, fontSize: "clamp(28px, 5vw, 44px)", fontWeight: 700, color: "white", margin: "0 0 14px", lineHeight: 1.2 }}>
           {title}
         </h1>
         {subtitle && (
-          <p style={{ fontFamily: FONTS.sans, fontSize: 16, color: "rgba(255,255,255,0.78)", maxWidth: 640, margin: 0, lineHeight: 1.65 }}>
+          <p style={{ fontFamily: FONTS.sans, fontSize: 16, color: "rgba(255,255,255,0.88)", maxWidth: 640, margin: 0, lineHeight: 1.65 }}>
             {subtitle}
           </p>
         )}
@@ -125,7 +125,7 @@ export function CtaButton({ to, href, children, variant = "primary", size = "md"
 export function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div style={{ display: "flex", gap: 12, padding: "8px 0", borderBottom: "1px solid #f0f4f1" }}>
-      <span style={{ fontFamily: FONTS.sans, fontSize: 12, color: "#888", minWidth: 130, flexShrink: 0 }}>{label}</span>
+      <span style={{ fontFamily: FONTS.sans, fontSize: 12, color: "#6b7280", minWidth: 130, flexShrink: 0 }}>{label}</span>
       <span style={{ fontFamily: FONTS.sans, fontSize: 13, color: COLORS.charcoalText, fontWeight: 500 }}>{value}</span>
     </div>
   );
@@ -142,10 +142,10 @@ export function PhaseItem({ phase, label, title, items, active }: {
       borderRadius: 12, padding: "20px",
     }}>
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
-        <span style={{ fontFamily: FONTS.mono, fontSize: 11, color: active ? COLORS.kutircharGreen : "#888", fontWeight: 700, background: active ? "#e0f4e8" : "#f7f7f7", padding: "3px 10px", borderRadius: 6 }}>
+        <span style={{ fontFamily: FONTS.mono, fontSize: 11, color: active ? COLORS.kutircharGreen : "#6b7280", fontWeight: 700, background: active ? "#e0f4e8" : "#f7f7f7", padding: "3px 10px", borderRadius: 6 }}>
           {phase}
         </span>
-        <span style={{ fontFamily: FONTS.sans, fontSize: 11, color: "#aaa" }}>{label}</span>
+        <span style={{ fontFamily: FONTS.sans, fontSize: 11, color: "#6b7280" }}>{label}</span>
       </div>
       <p style={{ fontFamily: FONTS.sans, fontSize: 14, fontWeight: 600, color: COLORS.charcoalText, margin: "0 0 10px" }}>{title}</p>
       <ul style={{ margin: 0, paddingLeft: 18 }}>

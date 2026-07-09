@@ -80,8 +80,10 @@ export function ContactPage() {
             <div style={{ display: "flex", flexDirection: "column", gap: 16, marginBottom: 32 }}>
               {[
                 { icon: "✉", label: "Email", value: BRAND.contact.email, href: `mailto:${BRAND.contact.email}`, desc: "Best for formal inquiries, documentation requests" },
-                { icon: "📞", label: "Phone / Call", value: BRAND.contact.phone, href: `tel:${BRAND.contact.phone}`, desc: "Available 9am–6pm (Bangladesh time)" },
-                { icon: "💬", label: "WhatsApp", value: "WhatsApp Chat", href: `https://wa.me/${BRAND.contact.whatsapp.replace(/\D/g, "")}?text=Hello%20Kutirchar%20EcoFarm`, desc: "Quick questions and pre-inquiry chat" },
+                // Phone / WhatsApp are only shown once a real, verified line exists in brand.ts.
+                // No fabricated numbers, and no broken tel:/wa.me links from empty values.
+                ...(BRAND.contact.phone ? [{ icon: "📞", label: "Phone / Call", value: BRAND.contact.phone, href: `tel:${BRAND.contact.phone}`, desc: "Available 9am–6pm (Bangladesh time)" }] : []),
+                ...(BRAND.contact.whatsapp ? [{ icon: "💬", label: "WhatsApp", value: "WhatsApp Chat", href: `https://wa.me/${BRAND.contact.whatsapp.replace(/\D/g, "")}?text=Hello%20Kutirchar%20EcoFarm`, desc: "Quick questions and pre-inquiry chat" }] : []),
               ].map((ch) => (
                 <a key={ch.label} href={ch.href} target={ch.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer"
                   style={{ display: "flex", gap: 14, alignItems: "flex-start", padding: "14px 18px", background: "white", borderRadius: 12, border: "1px solid #e5eee9", textDecoration: "none", transition: "border-color 0.15s" }}>
@@ -89,11 +91,17 @@ export function ContactPage() {
                   <div>
                     <p style={{ fontFamily: FONTS.sans, fontSize: 13, fontWeight: 700, color: COLORS.kutircharGreen, margin: "0 0 2px" }}>{ch.label}</p>
                     <p style={{ fontFamily: FONTS.sans, fontSize: 13, color: COLORS.charcoalText, margin: "0 0 3px" }}>{ch.value}</p>
-                    <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: "#888", margin: 0 }}>{ch.desc}</p>
+                    <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: "#6b7280", margin: 0 }}>{ch.desc}</p>
                   </div>
                 </a>
               ))}
             </div>
+
+            {!BRAND.contact.phone && !BRAND.contact.whatsapp && (
+              <p style={{ fontFamily: FONTS.sans, fontSize: 12, color: "#6b7280", lineHeight: 1.6, margin: "-16px 0 32px" }}>
+                A direct phone / WhatsApp line is shared after a formal inquiry — email us first and we will respond with the appropriate contact channel for your request.
+              </p>
+            )}
 
             <SectionHeading title="Office Location" />
             <Card>
@@ -103,7 +111,7 @@ export function ContactPage() {
                 Kamarkhanda, Sirajganj<br />
                 Bangladesh
               </p>
-              <p style={{ fontFamily: FONTS.sans, fontSize: 12, color: "#888", margin: 0 }}>
+              <p style={{ fontFamily: FONTS.sans, fontSize: 12, color: "#6b7280", margin: 0 }}>
                 Site visits by appointment only. Please submit a formal inquiry first.
               </p>
             </Card>
@@ -114,7 +122,7 @@ export function ContactPage() {
                 {inquiryTypes.map((t) => (
                   <div key={t.value} style={{ padding: "10px 14px", background: "#fafafa", borderRadius: 8, border: "1px solid #f0f0f0" }}>
                     <p style={{ fontFamily: FONTS.sans, fontSize: 13, fontWeight: 600, color: COLORS.charcoalText, margin: "0 0 2px" }}>{t.label}</p>
-                    <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: "#888", margin: 0 }}>{t.desc}</p>
+                    <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: "#6b7280", margin: 0 }}>{t.desc}</p>
                   </div>
                 ))}
               </div>
@@ -124,14 +132,14 @@ export function ContactPage() {
           {/* Right: form */}
           <div>
             {status === "success" ? (
-              <div style={{ background: "#f0f9f3", border: "2px solid #c0ddc8", borderRadius: 16, padding: "40px 32px", textAlign: "center" }}>
+              <div role="status" aria-live="polite" style={{ background: "#f0f9f3", border: "2px solid #c0ddc8", borderRadius: 16, padding: "40px 32px", textAlign: "center" }}>
                 <p style={{ fontSize: 48, margin: "0 0 16px" }}>✓</p>
                 <h3 style={{ fontFamily: FONTS.serif, fontSize: 24, color: COLORS.kutircharGreen, margin: "0 0 10px" }}>Inquiry Received</h3>
                 <p style={{ fontFamily: FONTS.sans, fontSize: 14, color: "#444", lineHeight: 1.7, margin: "0 0 8px" }}>
                   Thank you for reaching out to Kutirchar EcoFarm. We will review your inquiry and respond within <strong>3 business days</strong>.
                 </p>
                 <p style={{ fontFamily: FONTS.sans, fontSize: 13, color: "#666", margin: "0 0 24px" }}>
-                  For urgent matters, contact us directly via WhatsApp or phone.
+                  For urgent matters, email us directly at info@kutircharecofarm.com.
                 </p>
                 <button onClick={handleReset} style={{ background: COLORS.kutircharGreen, color: "white", fontFamily: FONTS.sans, fontSize: 14, fontWeight: 600, padding: "11px 24px", borderRadius: 10, border: "none", cursor: "pointer" }}>
                   Submit Another Inquiry
@@ -200,7 +208,7 @@ export function ContactPage() {
                 </FormField>
 
                 {/* Privacy note */}
-                <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: "#888", lineHeight: 1.55, margin: "0 0 20px", background: "#f9f9f9", padding: "10px 12px", borderRadius: 8 }}>
+                <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: "#6b7280", lineHeight: 1.55, margin: "0 0 20px", background: "#f9f9f9", padding: "10px 12px", borderRadius: 8 }}>
                   🔒 Your contact information is used only to respond to your inquiry. We do not share your details with third parties. No sensitive documents are collected through this form.
                 </p>
 

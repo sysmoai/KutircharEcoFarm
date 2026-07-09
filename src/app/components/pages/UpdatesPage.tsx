@@ -59,7 +59,7 @@ const updates = [
 const categories: Category[] = ["All", "Verification", "Governance", "Planning", "Construction", "Digital", "Products"];
 
 const statusColor = (s: string) =>
-  s === "Completed" ? COLORS.kutircharGreen : s === "In Progress" ? COLORS.riverBlue : s === "Open" ? COLORS.riskRed : COLORS.bioOlive;
+  s === "Completed" ? COLORS.kutircharGreen : s === "In Progress" ? COLORS.riverBlue : s === "Open" ? COLORS.riskRed : COLORS.bioOliveDeep;
 
 export function UpdatesPage() {
   const [filter, setFilter] = useState<Category>("All");
@@ -78,7 +78,7 @@ export function UpdatesPage() {
       <section style={{ background: COLORS.charcoalText, padding: "12px 0" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", textAlign: "center" }}>
           <p style={{ fontFamily: FONTS.sans, fontSize: 12, color: "rgba(255,255,255,0.65)", margin: 0 }}>
-            📸 Photo-first · Evidence links always · No confidential IDs · Updated as progress occurs
+            📸 Photo-first · Evidence-referenced · No confidential IDs · Updated as progress occurs
           </p>
         </div>
       </section>
@@ -114,7 +114,7 @@ export function UpdatesPage() {
                   <PhaseChip phase={update.phase} />
                   <span style={{ fontFamily: FONTS.sans, fontSize: 11, fontWeight: 700, color: statusColor(update.status) }}>● {update.status}</span>
                 </div>
-                <span style={{ fontFamily: FONTS.sans, fontSize: 12, color: "#888", fontWeight: 500 }}>{update.date}</span>
+                <span style={{ fontFamily: FONTS.sans, fontSize: 12, color: "#6b7280", fontWeight: 500 }}>{update.date}</span>
               </div>
 
               <h3 style={{ fontFamily: FONTS.sans, fontSize: 16, fontWeight: 700, color: COLORS.charcoalText, margin: "0 0 10px" }}>{update.title}</h3>
@@ -162,7 +162,7 @@ export function UpdatesPage() {
 
         {filtered.length === 0 && (
           <div style={{ textAlign: "center", padding: "48px 0" }}>
-            <p style={{ fontFamily: FONTS.sans, fontSize: 14, color: "#888" }}>No updates in this category yet.</p>
+            <p style={{ fontFamily: FONTS.sans, fontSize: 14, color: "#6b7280" }}>No updates in this category yet.</p>
           </div>
         )}
       </PageSection>
@@ -173,7 +173,7 @@ export function UpdatesPage() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20, maxWidth: 900, margin: "0 auto" }}>
           {[
             { icon: "📅", title: "Date-stamped", body: "Every update is dated. Nothing is backdated or modified without notation." },
-            { icon: "🔗", title: "Evidence-linked", body: "Claims reference specific documentation. No claim without supporting evidence." },
+            { icon: "🔗", title: "Evidence-referenced", body: "Claims reference specific documentation, available to qualified stakeholders on formal request. No claim without supporting evidence." },
             { icon: "🔓", title: "Open gaps shown", body: "We publicly show what is not done. Gaps are not hidden — they drive the work." },
             { icon: "🔒", title: "Privacy protected", body: "No NID, PIN, bank details, or sensitive personal identifiers ever published." },
           ].map((item) => (

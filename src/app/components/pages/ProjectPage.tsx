@@ -101,11 +101,11 @@ export function ProjectPage() {
             ].map((row) => <InfoRow key={row.label} label={row.label} value={row.value} />)}
           </div>
           <div style={{ background: COLORS.deepFarmGreen, borderRadius: 12, padding: "24px", color: "white" }}>
-            <p style={{ fontFamily: FONTS.sans, fontSize: 12, color: "rgba(255,255,255,0.5)", marginBottom: 12, fontWeight: 700, textTransform: "uppercase" as const, letterSpacing: "0.08em" }}>
+            <p style={{ fontFamily: FONTS.sans, fontSize: 12, color: "rgba(255,255,255,0.72)", marginBottom: 12, fontWeight: 700, textTransform: "uppercase" as const, letterSpacing: "0.08em" }}>
               Land Status Summary
             </p>
             {[
-              { item: "Zone A land title confirmed", done: true },
+              { item: "Zone A land documents — under review", done: false },
               { item: "Zone A boundary survey", done: false },
               { item: "Zone A SPT soil test", done: false },
               { item: "Zone B ejmali legal status", done: false },

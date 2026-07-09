@@ -36,8 +36,8 @@ export function Section06ClearSpace() {
                 {item.context}
               </p>
               <p style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, fontWeight: 600, color: "#1E2420" }}>{item.minSize}</p>
-              <p style={{ fontFamily: "'Inter', monospace", fontSize: 11, color: "#4F9A3D" }}>{item.pxEq}</p>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#888", marginTop: 4 }}>{item.note}</p>
+              <p style={{ fontFamily: "'Inter', monospace", fontSize: 11, color: "#1F6B3A" }}>{item.pxEq}</p>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#6b7280", marginTop: 4 }}>{item.note}</p>
             </div>
           ))}
         </div>
@@ -75,15 +75,15 @@ export function Section06ClearSpace() {
               {/* 2X recommended zone */}
               <div style={{ position: "absolute", inset: 0, border: "1.5px dashed #c8ddc8", borderRadius: "50%" }} />
               {/* 1X exclusion zone */}
-              <div style={{ position: "absolute", inset: 20, border: "1.5px dashed #F2B544", borderRadius: "50%" }} />
+              <div style={{ position: "absolute", inset: 20, border: "1.5px dashed #9A6A00", borderRadius: "50%" }} />
               {/* Icon */}
               <img src={logoIcon} alt="spacing diagram" style={{ width: 80, height: 80, objectFit: "contain", position: "relative", zIndex: 1 }} />
 
               {/* 1X label — right side, inside container */}
               <div style={{ position: "absolute", right: 4, top: "50%", transform: "translateY(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-                <div style={{ width: 1, height: 20, background: "#F2B544" }} />
-                <span style={{ fontFamily: "'Inter', monospace", fontSize: 9, color: "#F2B544", fontWeight: 700 }}>1X</span>
-                <div style={{ width: 1, height: 20, background: "#F2B544" }} />
+                <div style={{ width: 1, height: 20, background: "#9A6A00" }} />
+                <span style={{ fontFamily: "'Inter', monospace", fontSize: 9, color: "#9A6A00", fontWeight: 700 }}>1X</span>
+                <div style={{ width: 1, height: 20, background: "#9A6A00" }} />
               </div>
 
               {/* 2X label — left side, inside container */}
@@ -97,12 +97,12 @@ export function Section06ClearSpace() {
             {/* Legend */}
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-2">
-                <div style={{ width: 24, height: 1, borderTop: "1.5px dashed #F2B544" }} />
-                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#888" }}>1X Exclusion zone</span>
+                <div style={{ width: 24, height: 1, borderTop: "1.5px dashed #9A6A00" }} />
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#6b7280" }}>1X Exclusion zone</span>
               </div>
               <div className="flex items-center gap-2">
                 <div style={{ width: 24, height: 1, borderTop: "1.5px dashed #c8ddc8" }} />
-                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#888" }}>2X Recommended safe zone</span>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#6b7280" }}>2X Recommended safe zone</span>
               </div>
             </div>
           </div>
@@ -131,7 +131,7 @@ function ClearSpaceDemo() {
         <div style={{
           position: "absolute",
           width: iconSize + x * 2, height: iconSize + x * 2,
-          border: "1.5px dashed #F2B544", borderRadius: 4,
+          border: "1.5px dashed #9A6A00", borderRadius: 4,
           top: x, left: x,
         }} />
         {/* Icon */}
@@ -139,17 +139,17 @@ function ClearSpaceDemo() {
 
         {/* X measurement bracket on top */}
         <div style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-          <span style={{ fontFamily: "'Inter', monospace", fontSize: 9, color: "#F2B544", fontWeight: 700 }}>X = {x}px</span>
-          <div style={{ width: 1, height: x, background: "#F2B544" }} />
+          <span style={{ fontFamily: "'Inter', monospace", fontSize: 9, color: "#9A6A00", fontWeight: 700 }}>X = {x}px</span>
+          <div style={{ width: 1, height: x, background: "#9A6A00" }} />
         </div>
       </div>
 
-      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#888", textAlign: "center", lineHeight: 1.5 }}>
+      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#6b7280", textAlign: "center", lineHeight: 1.5 }}>
         X = Icon radius = {x}px (half of {iconSize}px icon)
       </p>
       <div className="flex gap-4 flex-wrap justify-center">
-        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#F2B544" }}>── 1X exclusion</span>
-        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#c8ddc8" }}>── 2X safe zone</span>
+        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#9A6A00" }}>── 1X exclusion</span>
+        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#1F6B3A" }}>── 2X safe zone</span>
       </div>
     </div>
   );
@@ -159,7 +159,7 @@ function ClearSpaceHorizontal() {
   return (
     <div className="flex flex-col items-center gap-4 p-4" style={{ background: "#fafafa", borderRadius: 8 }}>
       <div style={{ position: "relative", padding: "16px 24px" }}>
-        <div style={{ position: "absolute", inset: 0, border: "1.5px dashed #F2B544", borderRadius: 4 }} />
+        <div style={{ position: "absolute", inset: 0, border: "1.5px dashed #9A6A00", borderRadius: 4 }} />
         <div className="flex items-center gap-3">
           <img src={logoIcon} alt="icon" style={{ width: 48, height: 48, objectFit: "contain" }} />
           <div>
@@ -167,17 +167,17 @@ function ClearSpaceHorizontal() {
               Kutirchar EcoFarm
             </span>
             <div style={{ height: 1, background: "#1F6B3A", opacity: 0.18, margin: "3px 0" }} />
-            <span style={{ fontFamily: "'Noto Sans Bengali', sans-serif", fontSize: 14, fontWeight: 500, color: "#1F6B3A", display: "block", lineHeight: 1.45 }}>
+            <span style={{ fontFamily: "'Noto Serif Bengali', Georgia, serif", fontSize: 14, fontWeight: 600, color: "#1F6B3A", display: "block", lineHeight: 1.4 }}>
               কুটিরচর ইকোফার্ম
             </span>
           </div>
         </div>
       </div>
-      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#888", textAlign: "center" }}>
+      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#6b7280", textAlign: "center" }}>
         Minimum 1X exclusion zone on all sides of the full lockup
       </p>
       <div className="flex gap-4 flex-wrap justify-center">
-        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#F2B544" }}>── Exclusion zone (1X)</span>
+        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#9A6A00" }}>── Exclusion zone (1X)</span>
         <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#1F6B3A" }}>── Logo boundary</span>
       </div>
     </div>

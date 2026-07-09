@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import logoIcon from "../../../imports/image.png";
-import { BRAND, COLORS, FONTS } from "../../brand";
+import { COLORS, FONTS } from "../../brand";
 import { PhaseChip } from "../shared/PhaseChip";
 import { PageSection, Card, StopRule, CtaButton } from "../shared/Shared";
 
@@ -44,16 +44,16 @@ export function HomePage() {
                 </span>
               </div>
 
-              <p style={{ fontFamily: FONTS.bengali, fontSize: 18, color: "rgba(255,255,255,0.72)", margin: "0 0 8px", lineHeight: 1.4 }}>
+              <p style={{ fontFamily: FONTS.serifBengali, fontWeight: 600, fontSize: 20, color: "rgba(255,255,255,0.9)", margin: "0 0 8px", lineHeight: 1.35 }}>
                 কুটিরচর ইকোফার্ম
               </p>
               <h1 style={{ fontFamily: FONTS.serif, fontSize: "clamp(32px, 6vw, 56px)", fontWeight: 700, color: "white", margin: "0 0 16px", lineHeight: 1.1 }}>
                 Kutirchar EcoFarm
               </h1>
-              <p style={{ fontFamily: FONTS.sans, fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.78)", margin: "0 0 10px", lineHeight: 1.6, maxWidth: 560 }}>
+              <p style={{ fontFamily: FONTS.sans, fontSize: "clamp(15px, 2vw, 18px)", color: "rgba(255,255,255,0.85)", margin: "0 0 10px", lineHeight: 1.6, maxWidth: 560 }}>
                 Smart Cattle & Circular Energy Ecosystem
               </p>
-              <p style={{ fontFamily: FONTS.sans, fontSize: 14, color: "rgba(255,255,255,0.55)", margin: "0 0 32px" }}>
+              <p style={{ fontFamily: FONTS.sans, fontSize: 14, color: "rgba(255,255,255,0.82)", margin: "0 0 32px" }}>
                 Dairy · Biogas · Solar · Silage — Kutirchar, Sirajganj, Bangladesh
               </p>
 
@@ -159,9 +159,9 @@ export function HomePage() {
 
       {/* ── Proof & Governance preview ────────────────────────────────────── */}
       <PageSection>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, alignItems: "start" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 40, alignItems: "start" }}>
           <div>
-            <div style={{ display: "flex", align: "center", gap: 12, marginBottom: 16 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
               <h2 style={{ fontFamily: FONTS.serif, fontSize: 26, fontWeight: 600, color: COLORS.charcoalText, margin: 0 }}>
                 Proof &amp; Governance
               </h2>
@@ -179,7 +179,7 @@ export function HomePage() {
               ].map((gap) => (
                 <div key={gap.label} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 14px", background: "#fafafa", borderRadius: 8, border: "1px solid #f0f0f0" }}>
                   <span style={{ fontFamily: FONTS.sans, fontSize: 13, color: COLORS.charcoalText }}>{gap.label}</span>
-                  <span style={{ fontFamily: FONTS.sans, fontSize: 11, fontWeight: 600, color: gap.status === "In Progress" ? COLORS.riverBlue : gap.status === "Open Gap" ? COLORS.riskRed : "#888" }}>
+                  <span style={{ fontFamily: FONTS.sans, fontSize: 11, fontWeight: 600, color: gap.status === "In Progress" ? COLORS.riverBlue : gap.status === "Open Gap" ? COLORS.riskRed : "#6b7280" }}>
                     {gap.status}
                   </span>
                 </div>
@@ -189,7 +189,7 @@ export function HomePage() {
           </div>
           <div>
             <div style={{ background: COLORS.deepFarmGreen, borderRadius: 16, padding: "28px", color: "white" }}>
-              <p style={{ fontFamily: FONTS.sans, fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.5)", letterSpacing: "0.1em", marginBottom: 12, textTransform: "uppercase" as const }}>
+              <p style={{ fontFamily: FONTS.sans, fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.72)", letterSpacing: "0.1em", marginBottom: 12, textTransform: "uppercase" as const }}>
                 Governance Principle
               </p>
               <p style={{ fontFamily: FONTS.serif, fontSize: 18, color: "white", lineHeight: 1.6, margin: "0 0 18px", fontStyle: "italic" }}>
@@ -218,7 +218,7 @@ export function HomePage() {
             <Card key={u.title}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 }}>
                 <span style={{ fontFamily: FONTS.sans, fontSize: 10, fontWeight: 700, color: COLORS.riverBlue, background: "#eff6fb", padding: "2px 8px", borderRadius: 6, border: "1px solid #b8d4e0" }}>{u.category}</span>
-                <span style={{ fontFamily: FONTS.sans, fontSize: 11, color: "#888" }}>{u.date}</span>
+                <span style={{ fontFamily: FONTS.sans, fontSize: 11, color: "#6b7280" }}>{u.date}</span>
               </div>
               <p style={{ fontFamily: FONTS.sans, fontSize: 14, fontWeight: 600, color: COLORS.charcoalText, margin: "0 0 8px" }}>{u.title}</p>
               <p style={{ fontFamily: FONTS.sans, fontSize: 12, color: "#555", lineHeight: 1.6, margin: "0 0 12px" }}>{u.summary}</p>
@@ -232,13 +232,13 @@ export function HomePage() {
       <PageSection>
         <div style={{ background: COLORS.deepFarmGreen, borderRadius: 20, padding: "32px 36px", display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 24 }}>
           <div>
-            <p style={{ fontFamily: FONTS.sans, fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.45)", letterSpacing: "0.1em", textTransform: "uppercase" as const, marginBottom: 6 }}>Complete Brand System</p>
+            <p style={{ fontFamily: FONTS.sans, fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.72)", letterSpacing: "0.1em", textTransform: "uppercase" as const, marginBottom: 6 }}>Complete Brand System</p>
             <h3 style={{ fontFamily: FONTS.serif, fontSize: 22, fontWeight: 600, color: "white", margin: "0 0 8px" }}>
               Brand Identity Guide — Full System
             </h3>
             <p style={{ fontFamily: FONTS.sans, fontSize: 13, color: "rgba(255,255,255,0.7)", margin: 0, lineHeight: 1.6 }}>
               Logo system · Color tokens · Typography · Seal · Export Assets · AI Agent Tokens<br/>
-              <span style={{ fontFamily: FONTS.bengali, fontSize: 12, color: "rgba(255,255,255,0.5)" }}>লোগো, রং, টাইপোগ্রাফি, সিল, এবং সব ডাউনলোড</span>
+              <span style={{ fontFamily: FONTS.bengali, fontSize: 12, color: "rgba(255,255,255,0.72)" }}>লোগো, রং, টাইপোগ্রাফি, সিল, এবং সব ডাউনলোড</span>
             </p>
           </div>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
@@ -255,7 +255,7 @@ export function HomePage() {
       {/* ── Partnership CTA ───────────────────────────────────────────────── */}
       <PageSection bg={COLORS.kutircharGreen} py={56}>
         <div style={{ textAlign: "center" }}>
-          <p style={{ fontFamily: FONTS.bengali, fontSize: 16, color: "rgba(255,255,255,0.65)", margin: "0 0 8px" }}>অংশীদারিত্ব ও সহযোগিতা</p>
+          <p style={{ fontFamily: FONTS.bengali, fontSize: 16, color: "rgba(255,255,255,0.85)", margin: "0 0 8px" }}>অংশীদারিত্ব ও সহযোগিতা</p>
           <h2 style={{ fontFamily: FONTS.serif, fontSize: 32, fontWeight: 600, color: "white", margin: "0 0 14px" }}>
             Bank, Government &amp; Investor Inquiries
           </h2>

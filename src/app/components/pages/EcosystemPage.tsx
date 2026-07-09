@@ -7,7 +7,7 @@ const flow = [
     inputs: ["Local cows (2–3 initially)", "Napier fodder + silage", "Clean water supply"],
     outputs: ["Fresh dairy milk", "Manure (biogas input)", "Bio-slurry (after digestion)"],
     phase: "Now" as const, phaseNote: "Phase 1: Pilot cattle barn on Zone A" },
-  { icon: "⚗️", title: "Biogas Digester", color: COLORS.bioOlive, bg: "#f5f6ee",
+  { icon: "⚗️", title: "Biogas Digester", color: COLORS.bioOliveDeep, bg: "#f5f6ee",
     inputs: ["Cattle manure (daily)", "Water for slurry mix", "Organic kitchen waste"],
     outputs: ["Cooking gas (replace LPG)", "Bio-slurry liquid fertilizer", "Reduced waste odour"],
     phase: "Next" as const, phaseNote: "Phase 3: 6m³ digester (gate: consistent manure)" },
@@ -60,7 +60,7 @@ export function EcosystemPage() {
                   {step.from}
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "0 10px" }}>
-                  <span style={{ fontFamily: FONTS.sans, fontSize: 10, color: "#888", fontStyle: "italic" }}>{step.arrow}</span>
+                  <span style={{ fontFamily: FONTS.sans, fontSize: 10, color: "#6b7280", fontStyle: "italic" }}>{step.arrow}</span>
                   <span style={{ fontSize: 18, color: COLORS.kutircharGreen, lineHeight: 1 }}>→</span>
                 </div>
                 {i === circularLogic.length - 1 && (
@@ -92,7 +92,7 @@ export function EcosystemPage() {
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
                 <div>
-                  <p style={{ fontFamily: FONTS.sans, fontSize: 10, fontWeight: 700, color: "#888", textTransform: "uppercase" as const, letterSpacing: "0.06em", marginBottom: 6 }}>Inputs</p>
+                  <p style={{ fontFamily: FONTS.sans, fontSize: 10, fontWeight: 700, color: "#6b7280", textTransform: "uppercase" as const, letterSpacing: "0.06em", marginBottom: 6 }}>Inputs</p>
                   {item.inputs.map((inp) => (
                     <div key={inp} style={{ display: "flex", gap: 6, marginBottom: 4 }}>
                       <span style={{ color: "#aaa", fontSize: 12, flexShrink: 0 }}>→</span>
@@ -101,7 +101,7 @@ export function EcosystemPage() {
                   ))}
                 </div>
                 <div>
-                  <p style={{ fontFamily: FONTS.sans, fontSize: 10, fontWeight: 700, color: "#888", textTransform: "uppercase" as const, letterSpacing: "0.06em", marginBottom: 6 }}>Outputs</p>
+                  <p style={{ fontFamily: FONTS.sans, fontSize: 10, fontWeight: 700, color: "#6b7280", textTransform: "uppercase" as const, letterSpacing: "0.06em", marginBottom: 6 }}>Outputs</p>
                   {item.outputs.map((out) => (
                     <div key={out} style={{ display: "flex", gap: 6, marginBottom: 4 }}>
                       <span style={{ color: item.color, fontSize: 12, flexShrink: 0 }}>✓</span>

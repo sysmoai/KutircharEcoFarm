@@ -58,10 +58,18 @@ const groups = ["Logo System", "Color & Type", "Guidelines", "Production"];
 
 export function BrandGuidePage() {
   const [searchParams] = useSearchParams();
-  const initialSection = Math.min(13, Math.max(0, Number(searchParams.get("section") ?? 0)));
+  const parsedSection = Number(searchParams.get("section"));
+  const initialSection = Number.isFinite(parsedSection) ? Math.min(13, Math.max(0, Math.trunc(parsedSection))) : 0;
   const [activeSection, setActiveSection] = useState(initialSection);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  // Default open on desktop, closed on mobile (where the sidebar is an overlay drawer)
+  const [sidebarOpen, setSidebarOpen] = useState(() => (typeof window !== "undefined" ? window.innerWidth > 768 : true));
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // On mobile, jumping to a section should close the drawer to reveal the content
+  function goToSection(id: number) {
+    setActiveSection(id);
+    if (typeof window !== "undefined" && window.innerWidth <= 768) setSidebarOpen(false);
+  }
 
   // Update document title
   useEffect(() => {
@@ -77,10 +85,21 @@ export function BrandGuidePage() {
   }, [activeSection]);
 
   return (
-    <div ref={containerRef} style={{ display: "flex", height: "calc(100vh - 92px)", minHeight: 400, overflow: "hidden", background: COLORS.documentIvory }}>
+    <div ref={containerRef} style={{ position: "relative", display: "flex", height: "calc(100vh - 92px)", minHeight: 400, overflow: "hidden", background: COLORS.documentIvory }}>
+
+      {/* Backdrop — only visible on mobile when the drawer is open */}
+      {sidebarOpen && (
+        <button
+          className="bg-backdrop"
+          aria-label="Close section navigation"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
 
       {/* ── Sidebar ─────────────────────────────────────────────────────── */}
       <aside
+        className="bg-sidebar"
+        aria-label="Brand guide sections"
         style={{
           width: sidebarOpen ? 256 : 0,
           minWidth: sidebarOpen ? 256 : 0,
@@ -96,13 +115,13 @@ export function BrandGuidePage() {
         {/* Sidebar header */}
         <div style={{ padding: "16px 16px 12px", borderBottom: "1px solid rgba(255,255,255,0.1)", flexShrink: 0 }}>
           <Link to="/" style={{ display: "flex", alignItems: "center", gap: 6, textDecoration: "none", marginBottom: 10, padding: "4px 0" }}>
-            <span style={{ fontFamily: FONTS.sans, fontSize: 11, color: "rgba(255,255,255,0.5)" }}>← Website</span>
+            <span style={{ fontFamily: FONTS.sans, fontSize: 11, color: "rgba(255,255,255,0.72)" }}>← Website</span>
           </Link>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <img src={logoIcon} alt="logo" style={{ width: 28, height: 28, filter: "brightness(0) invert(1)", flexShrink: 0 }} />
             <div>
               <p style={{ fontFamily: FONTS.serif, fontSize: 12, fontWeight: 600, color: "white", margin: 0, lineHeight: 1.2 }}>Brand Identity Guide</p>
-              <p style={{ fontFamily: FONTS.bengali, fontSize: 10, color: "rgba(255,255,255,0.55)", margin: 0 }}>কুটিরচর ইকোফার্ম</p>
+              <p style={{ fontFamily: FONTS.bengali, fontSize: 10, color: "rgba(255,255,255,0.72)", margin: 0 }}>কুটিরচর ইকোফার্ম</p>
             </div>
           </div>
         </div>
@@ -111,13 +130,14 @@ export function BrandGuidePage() {
         <nav style={{ overflowY: "auto", flex: 1, padding: "8px 0" }}>
           {groups.map((group) => (
             <div key={group}>
-              <p style={{ fontFamily: FONTS.sans, fontSize: 9, fontWeight: 700, color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em", textTransform: "uppercase", padding: "10px 16px 4px" }}>{group}</p>
+              <p style={{ fontFamily: FONTS.sans, fontSize: 9, fontWeight: 700, color: "rgba(255,255,255,0.62)", letterSpacing: "0.1em", textTransform: "uppercase", padding: "10px 16px 4px" }}>{group}</p>
               {navItems.filter((n) => n.group === group).map((item) => {
                 const isActive = activeSection === item.id;
                 return (
                   <button
                     key={item.id}
-                    onClick={() => setActiveSection(item.id)}
+                    onClick={() => goToSection(item.id)}
+                    aria-current={isActive ? "page" : undefined}
                     style={{
                       width: "100%", display: "flex", alignItems: "center", gap: 8,
                       padding: "7px 16px", background: isActive ? "rgba(242,181,68,0.12)" : "transparent",
@@ -125,7 +145,7 @@ export function BrandGuidePage() {
                       cursor: "pointer", textAlign: "left",
                     }}
                   >
-                    <span style={{ fontFamily: FONTS.mono, fontSize: 9, color: isActive ? COLORS.solarGold : "rgba(255,255,255,0.3)", fontWeight: 700, minWidth: 20 }}>{item.num}</span>
+                    <span style={{ fontFamily: FONTS.mono, fontSize: 9, color: isActive ? COLORS.solarGold : "rgba(255,255,255,0.62)", fontWeight: 700, minWidth: 20 }}>{item.num}</span>
                     <span style={{ fontFamily: FONTS.sans, fontSize: 12, color: isActive ? "white" : "rgba(255,255,255,0.65)", fontWeight: isActive ? 600 : 400, lineHeight: 1.3 }}>{item.label}</span>
                   </button>
                 );
@@ -136,7 +156,7 @@ export function BrandGuidePage() {
 
         {/* Sidebar footer */}
         <div style={{ padding: "10px 16px", borderTop: "1px solid rgba(255,255,255,0.1)", flexShrink: 0 }}>
-          <p style={{ fontFamily: FONTS.sans, fontSize: 9, color: "rgba(255,255,255,0.3)", lineHeight: 1.5, margin: 0 }}>
+          <p style={{ fontFamily: FONTS.sans, fontSize: 9, color: "rgba(255,255,255,0.62)", lineHeight: 1.5, margin: 0 }}>
             Brand locked 21 June 2026<br />Sections: 00–13
           </p>
         </div>
@@ -156,11 +176,12 @@ export function BrandGuidePage() {
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
               style={{ background: "none", border: "none", cursor: "pointer", padding: 4, display: "flex", flexDirection: "column", gap: 4 }}
-              aria-label="Toggle sidebar"
+              aria-label={sidebarOpen ? "Hide section navigation" : "Show section navigation"}
+              aria-expanded={sidebarOpen}
             >
               {[0,1,2].map((i) => <span key={i} style={{ display: "block", width: 16, height: 2, background: COLORS.kutircharGreen, borderRadius: 1 }} />)}
             </button>
-            <span style={{ fontFamily: FONTS.sans, fontSize: 11, color: "#aaa" }}>
+            <span style={{ fontFamily: FONTS.sans, fontSize: 11, color: "#6b7280" }}>
               {navItems[activeSection]?.num} — {navItems[activeSection]?.label}
             </span>
           </div>
@@ -168,13 +189,13 @@ export function BrandGuidePage() {
             {/* Quick jump to Export */}
             {activeSection !== 11 && (
               <button
-                onClick={() => setActiveSection(11)}
+                onClick={() => goToSection(11)}
                 style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.kutircharGreen, background: "#f0f9f3", border: `1px solid #c0ddc8`, borderRadius: 6, padding: "4px 10px", cursor: "pointer", fontWeight: 600 }}
               >
                 ↓ Export Assets
               </button>
             )}
-            <Link to="/" style={{ fontFamily: FONTS.sans, fontSize: 11, color: "#888", textDecoration: "none" }}>← Back to Website</Link>
+            <Link to="/" style={{ fontFamily: FONTS.sans, fontSize: 11, color: "#6b7280", textDecoration: "none" }}>← Back to Website</Link>
           </div>
         </div>
 
@@ -191,7 +212,7 @@ export function BrandGuidePage() {
         {/* Bottom nav */}
         <div style={{ background: "white", borderTop: "1px solid #e0eed5", padding: "10px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", flexShrink: 0 }}>
           <button
-            onClick={() => setActiveSection(Math.max(0, activeSection - 1))}
+            onClick={() => goToSection(Math.max(0, activeSection - 1))}
             disabled={activeSection === 0}
             style={{ fontFamily: FONTS.sans, fontSize: 12, color: activeSection === 0 ? "#ccc" : COLORS.kutircharGreen, background: "none", border: "none", cursor: activeSection === 0 ? "default" : "pointer", fontWeight: 500 }}
           >
@@ -203,15 +224,17 @@ export function BrandGuidePage() {
             {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => setActiveSection(item.id)}
+                onClick={() => goToSection(item.id)}
                 title={item.label}
+                aria-label={`${item.num} — ${item.label}`}
+                aria-current={activeSection === item.id ? "true" : undefined}
                 style={{ width: 6, height: 6, borderRadius: "50%", background: activeSection === item.id ? COLORS.kutircharGreen : "#d4e8db", border: "none", cursor: "pointer", padding: 0 }}
               />
             ))}
           </div>
 
           <button
-            onClick={() => setActiveSection(Math.min(13, activeSection + 1))}
+            onClick={() => goToSection(Math.min(13, activeSection + 1))}
             disabled={activeSection === 13}
             style={{ fontFamily: FONTS.sans, fontSize: 12, color: activeSection === 13 ? "#ccc" : COLORS.kutircharGreen, background: "none", border: "none", cursor: activeSection === 13 ? "default" : "pointer", fontWeight: 500 }}
           >
@@ -221,8 +244,26 @@ export function BrandGuidePage() {
       </div>
 
       <style>{`
+        .bg-backdrop { display: none; }
         @media (max-width: 768px) {
-          aside { width: 0 !important; min-width: 0 !important; }
+          /* Sidebar becomes an overlay drawer so the toggle works on mobile */
+          .bg-sidebar {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 50;
+            box-shadow: 2px 0 20px rgba(0,0,0,0.35);
+          }
+          .bg-backdrop {
+            display: block;
+            position: absolute;
+            inset: 0;
+            z-index: 40;
+            background: rgba(0,0,0,0.45);
+            border: none;
+            cursor: pointer;
+          }
         }
       `}</style>
     </div>

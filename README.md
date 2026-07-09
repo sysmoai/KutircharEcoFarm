@@ -43,7 +43,24 @@ A **complete digital system** for Kutirchar EcoFarm — combining a full public-
     ├── 11 Export Assets ← 43 download buttons
     ├── 12 Developer Notes
     └── 13 AI Agent Tokens
+
+/ (Root AI Guidelines)      ← Mandatory AI Rules
+├── AI_BRAND_GUIDELINES.md  ← Full AI system prompt
+└── .cursorrules            ← IDE-specific constraints
 ```
+
+---
+
+## 🤖 Built for the AI Era (AI Developer Instructions)
+
+This repository is specifically architected to be maintained, scaled, and built upon by AI developers, agents, and LLMs (like Cursor, Windsurf, GitHub Copilot, and Claude).
+
+**If you are an AI reading this repository, you MUST follow these steps:**
+1. Open and ingest `AI_BRAND_GUIDELINES.md` located at the root of the repository.
+2. Adhere strictly to the `.cursorrules` file.
+3. Understand the **Zero Fake Data Policy**: You are strictly forbidden from generating dummy text, fake numbers, or placeholder content.
+4. Apply the **Bilingual Optical Scaling Rule**: All Bengali text must be sized ~14% larger than its English sibling to achieve optical balance.
+5. All brand variables, URLs, and global state must be read from `src/app/brand.ts`.
 
 ---
 

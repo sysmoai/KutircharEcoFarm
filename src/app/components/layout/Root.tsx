@@ -21,6 +21,14 @@ export function Root() {
 
   useEffect(() => { setMenuOpen(false); }, [pathname]);
 
+  // Close the mobile menu on Escape (standard keyboard expectation)
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setMenuOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
   // Dynamic page titles for all website routes
   useEffect(() => {
     const titles: Record<string, string> = {
@@ -51,6 +59,9 @@ export function Root() {
   return (
     <div style={{ minHeight: "100vh", background: COLORS.documentIvory, fontFamily: FONTS.sans }}>
 
+      {/* ── Skip to content (keyboard / screen-reader users) ─────────────── */}
+      <a href="#main-content" className="skip-link">Skip to main content</a>
+
       {/* ── Top phase banner ─────────────────────────────────────────────── */}
       <div style={{ background: COLORS.kutircharGreen, padding: "6px 0", textAlign: "center" }}>
         <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: "rgba(255,255,255,0.85)", letterSpacing: "0.08em", margin: 0 }}>
@@ -78,8 +89,8 @@ export function Root() {
           <Link to="/" aria-label="Kutirchar EcoFarm — Home" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none", flexShrink: 0 }}>
             <img src={logoIcon} alt="Kutirchar EcoFarm logo" style={{ width: 36, height: 36, objectFit: "contain", filter: "brightness(0) invert(1)" }} />
             <div style={{ lineHeight: 1 }}>
-              <p style={{ fontFamily: FONTS.serif, fontSize: 13, fontWeight: 600, color: "white", margin: 0, lineHeight: 1.15 }}>Kutirchar EcoFarm</p>
-              <p style={{ fontFamily: FONTS.bengali, fontSize: 11, color: "rgba(255,255,255,0.7)", margin: 0 }}>কুটিরচর ইকোফার্ম</p>
+              <p style={{ fontFamily: FONTS.serif, fontSize: 13, fontWeight: 600, color: "white", margin: 0, lineHeight: 1.2 }}>Kutirchar EcoFarm</p>
+              <p style={{ fontFamily: FONTS.serifBengali, fontSize: 12, fontWeight: 500, color: "rgba(255,255,255,0.72)", margin: 0, lineHeight: 1.3 }}>কুটিরচর ইকোফার্ম</p>
             </div>
           </Link>
 
@@ -159,7 +170,6 @@ export function Root() {
         {/* Mobile menu dropdown */}
         {menuOpen && (
           <div
-            role="menu"
             style={{ background: COLORS.deepFarmGreen, borderTop: "1px solid rgba(255,255,255,0.1)", padding: "12px 20px 20px" }}
           >
             {navItems.map((item) => (
@@ -167,7 +177,6 @@ export function Root() {
                 key={item.to}
                 to={item.to}
                 end={item.to === "/"}
-                role="menuitem"
                 style={({ isActive }) => ({
                   display: "flex",
                   alignItems: "center",
@@ -184,7 +193,7 @@ export function Root() {
                 })}
               >
                 <span>{item.label}</span>
-                <span style={{ fontFamily: FONTS.bengali, fontSize: 12, color: "rgba(255,255,255,0.5)" }}>{item.labelBn}</span>
+                <span style={{ fontFamily: FONTS.bengali, fontSize: 12, color: "rgba(255,255,255,0.65)" }}>{item.labelBn}</span>
               </NavLink>
             ))}
             <Link
@@ -192,7 +201,7 @@ export function Root() {
               style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontFamily: FONTS.sans, fontSize: 14, fontWeight: 500, color: "rgba(255,255,255,0.88)", textDecoration: "none", padding: "11px 12px", borderRadius: 8, background: "rgba(242,181,68,0.08)", border: "1px solid rgba(242,181,68,0.2)", marginTop: 4 }}
             >
               <span>🎨 Brand Identity Guide</span>
-              <span style={{ fontFamily: FONTS.bengali, fontSize: 12, color: "rgba(255,255,255,0.4)" }}>ব্র্যান্ড গাইড</span>
+              <span style={{ fontFamily: FONTS.bengali, fontSize: 12, color: "rgba(255,255,255,0.62)" }}>ব্র্যান্ড গাইড</span>
             </Link>
             <Link
               to="/contact"
@@ -220,20 +229,20 @@ export function Root() {
                 <img src={logoIcon} alt="" style={{ width: 36, height: 36, filter: "brightness(0) invert(1)" }} />
                 <div>
                   <p style={{ fontFamily: FONTS.serif, fontSize: 14, fontWeight: 600, color: "white", margin: 0, lineHeight: 1.2 }}>Kutirchar EcoFarm</p>
-                  <p style={{ fontFamily: FONTS.bengali, fontSize: 12, color: "rgba(255,255,255,0.65)", margin: 0 }}>কুটিরচর ইকোফার্ম</p>
+                  <p style={{ fontFamily: FONTS.serifBengali, fontSize: 12, fontWeight: 500, color: "rgba(255,255,255,0.68)", margin: 0, lineHeight: 1.3 }}>কুটিরচর ইকোফার্ম</p>
                 </div>
               </div>
               <p style={{ fontFamily: FONTS.sans, fontSize: 12, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, margin: "0 0 12px" }}>
                 Smart Cattle & Circular Energy Ecosystem
               </p>
-              <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: "rgba(255,255,255,0.45)", lineHeight: 1.6, margin: 0 }}>
+              <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: "rgba(255,255,255,0.62)", lineHeight: 1.6, margin: 0 }}>
                 Kutirchar, Bhadraghat, Kamarkhanda<br />Sirajganj, Bangladesh
               </p>
             </div>
 
             {/* Navigation */}
             <div>
-              <p style={{ fontFamily: FONTS.sans, fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.4)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 14 }}>Navigate</p>
+              <p style={{ fontFamily: FONTS.sans, fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.62)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 14 }}>Navigate</p>
               {navItems.map((item) => (
                 <Link key={item.to} to={item.to}
                   style={{ display: "block", fontFamily: FONTS.sans, fontSize: 13, color: "rgba(255,255,255,0.72)", textDecoration: "none", padding: "4px 0" }}>
@@ -249,16 +258,24 @@ export function Root() {
 
             {/* Contact */}
             <div>
-              <p style={{ fontFamily: FONTS.sans, fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.4)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 14 }}>Contact</p>
+              <p style={{ fontFamily: FONTS.sans, fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.62)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 14 }}>Contact</p>
               <a href={`mailto:${BRAND.contact.email}`} style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.72)", textDecoration: "none", fontFamily: FONTS.sans, fontSize: 13, padding: "4px 0" }}>
                 ✉ {BRAND.contact.email}
               </a>
-              <a href={`tel:${BRAND.contact.phone}`} style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.72)", textDecoration: "none", fontFamily: FONTS.sans, fontSize: 13, padding: "4px 0" }}>
-                📞 {BRAND.contact.phone}
-              </a>
-              <a href={`https://wa.me/${BRAND.contact.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.72)", textDecoration: "none", fontFamily: FONTS.sans, fontSize: 13, padding: "4px 0" }}>
-                💬 WhatsApp
-              </a>
+              {/* Phone / WhatsApp only render once a real, verified number exists in brand.ts */}
+              {BRAND.contact.phone && (
+                <a href={`tel:${BRAND.contact.phone}`} style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.72)", textDecoration: "none", fontFamily: FONTS.sans, fontSize: 13, padding: "4px 0" }}>
+                  📞 {BRAND.contact.phone}
+                </a>
+              )}
+              {BRAND.contact.whatsapp && (
+                <a href={`https://wa.me/${BRAND.contact.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.72)", textDecoration: "none", fontFamily: FONTS.sans, fontSize: 13, padding: "4px 0" }}>
+                  💬 WhatsApp
+                </a>
+              )}
+              <Link to="/contact" style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.72)", textDecoration: "none", fontFamily: FONTS.sans, fontSize: 13, padding: "4px 0" }}>
+                ✍ Inquiry form
+              </Link>
               <a href={`https://${BRAND.contact.website}`} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.72)", textDecoration: "none", fontFamily: FONTS.sans, fontSize: 13, padding: "4px 0" }}>
                 🌐 {BRAND.contact.website}
               </a>
@@ -266,21 +283,21 @@ export function Root() {
 
             {/* Trust & Legal */}
             <div>
-              <p style={{ fontFamily: FONTS.sans, fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.4)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 14 }}>Trust Policy</p>
-              <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: "rgba(255,255,255,0.5)", lineHeight: 1.65, margin: "0 0 8px" }}>
+              <p style={{ fontFamily: FONTS.sans, fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.62)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 14 }}>Trust Policy</p>
+              <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: "rgba(255,255,255,0.65)", lineHeight: 1.65, margin: "0 0 8px" }}>
                 All claims are phase-gated and evidence-first. No NID, PIN, or sensitive identifiers are published.
               </p>
-              <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: "rgba(255,255,255,0.5)", lineHeight: 1.65, margin: 0 }}>
+              <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: "rgba(255,255,255,0.65)", lineHeight: 1.65, margin: 0 }}>
                 Zone B: non-private/ejmali land — removable use only. No permanent structures until legal verification.
               </p>
             </div>
           </div>
 
           <div style={{ borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: 20, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
-            <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: "rgba(255,255,255,0.4)", margin: 0 }}>
+            <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: "rgba(255,255,255,0.62)", margin: 0 }}>
               © 2026 Kutirchar EcoFarm — Emon Hossain. All rights reserved. Brand locked: 21 June 2026.
             </p>
-            <p style={{ fontFamily: FONTS.bengali, fontSize: 11, color: "rgba(255,255,255,0.35)", margin: 0 }}>
+            <p style={{ fontFamily: FONTS.bengali, fontSize: 11, color: "rgba(255,255,255,0.6)", margin: 0 }}>
               কুটিরচর ইকোফার্ম — যাচাই-প্রথম, প্রমাণ-ভিত্তিক
             </p>
           </div>

@@ -1,4 +1,5 @@
 import logoIcon from "../../imports/image.png";
+import { BRAND } from "../brand";
 
 export interface BrandLogoProps {
   iconSize?: number;
@@ -87,29 +88,29 @@ export function BrandLogo({
       lineHeight:    1.15,
       display:       "block",
     }}>
-      Kutirchar EcoFarm
+      {BRAND.nameEn}
     </span>
   );
 
   // ── Bengali name ──────────────────────────────────────────────────────────
-  // SAME SIZE as English (iconSize * 0.280).
-  // True expert bilingual match: identical em-size, natural balance from fonts.
-  //   Playfair Display 600  → high-contrast display serif, elegant strokes
-  //   Noto Sans Bengali 500 → uniform sans-serif, slightly denser
-  // At the same point size these qualities produce equal visual presence.
-  // Both cap-heights are ≈ 72–73% of em, so rendered heights match exactly.
+  // Sibling wordmark to the English. Both are DISPLAY SERIFS with matching
+  // stroke contrast and elegant curves, so the pair reads as one family:
+  //   Playfair Display 600   → high-contrast display serif
+  //   Noto Serif Bengali 600 → high-contrast Bangla display serif (matched weight)
+  // Bengali font size is increased slightly (~14%) so its x-height and visual bulk
+  // balance perfectly with the English uppercase ascenders.
   const benEl = (
     <span style={{
-      fontFamily:    "'Noto Sans Bengali', 'Noto Serif Bengali', sans-serif",
-      fontWeight:    500,
-      fontSize:      iconSize * 0.280,   // identical to English — true expert match
+      fontFamily:    "'Noto Serif Bengali', Georgia, serif",
+      fontWeight:    600,
+      fontSize:      iconSize * 0.320,   // bumped up to visually match English size
       color:         textColor,
-      letterSpacing: "0.008em",
-      lineHeight:    1.45,               // Bengali needs more room for matras
+      letterSpacing: "0",
+      lineHeight:    1.40,               // room for matras without feeling loose
       display:       "block",
       opacity:       1,
     }}>
-      কুটিরচর ইকোফার্ম
+      {BRAND.nameBn}
     </span>
   );
 
@@ -139,7 +140,7 @@ export function BrandLogo({
       marginTop:     iconSize * 0.08,
       textTransform: "uppercase" as const,
     }}>
-      Smart Cattle & Circular Energy Ecosystem
+      {BRAND.tagline}
     </span>
   ) : null;
 
@@ -154,7 +155,7 @@ export function BrandLogo({
       display:       "block",
       marginTop:     iconSize * 0.06,
     }}>
-      Dairy · Biogas · Solar · Silage
+      {BRAND.shortDesc}
     </span>
   ) : null;
 

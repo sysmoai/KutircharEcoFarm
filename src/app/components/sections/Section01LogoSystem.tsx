@@ -60,8 +60,8 @@ export function Section01LogoSystem() {
             <div className="w-full flex items-center justify-between px-4">
               <BrandLogo variant="horizontal" iconSize={44} mode="color" bilingual />
               <div style={{ textAlign: "right" }}>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#4F9A3D", fontWeight: 600, letterSpacing: "0.06em" }}>OFFICIAL DOCUMENT</p>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 9, color: "#999" }}>Kutirchar EcoFarm</p>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#1F6B3A", fontWeight: 600, letterSpacing: "0.06em" }}>OFFICIAL DOCUMENT</p>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 9, color: "#6b7280" }}>Kutirchar EcoFarm</p>
               </div>
             </div>
           </LogoPreview>

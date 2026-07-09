@@ -118,7 +118,7 @@ function ModeBox({ children, bg, label, bordered }: { children: React.ReactNode;
       <div className="flex items-center justify-center min-h-32" style={{ background: bg, padding: "24px 20px" }}>
         {children}
       </div>
-      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#888", padding: "8px 12px", background: bg === "white" ? "#fafafa" : undefined }}>
+      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#6b7280", padding: "8px 12px", background: bg === "white" ? "#fafafa" : undefined }}>
         {label}
       </p>
     </div>

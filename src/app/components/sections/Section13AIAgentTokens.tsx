@@ -30,8 +30,10 @@ const brandTokensJSON = {
     river_blue: "#2E6F8E",
     soil_brown: "#4A2F1B",
     bio_slurry_olive: "#708238",
+    bio_olive_deep: "#5E6E30", // WCAG-AA olive for small text on light backgrounds
     verification_yellow: "#F4C430",
     risk_red: "#B42318",
+    gov_gray: "#4B5563",
   },
   fonts: {
     brand_serif_english: "Playfair Display",
@@ -57,12 +59,13 @@ const brandTokensJSON = {
     "Kutir Char EcoFarm",
     "Kutirchar Eco Farm",
     "Kutirchar Smart Farm",
-    "Prangan Farm",
-    "Emon Farm",
-    "Kimon",
+    "kutirchar ecofarm",
+    "KEF",
+    "K-Farm",
   ],
   typography: {
-    note: "Use Playfair Display for all English display/heading. Use Inter for UI/body. Use Noto Sans Bengali for all Bengali text.",
+    note: "Mirrored bilingual system. Display/wordmark = serif: Playfair Display (English) + Noto Serif Bengali (Bangla). Body/UI = sans: Inter (English) + Noto Sans Bengali (Bangla). English and Bangla siblings always share the same role and weight.",
+    optical_scaling_rule: "CRITICAL: Bengali fonts (Noto Serif Bengali, Noto Sans Bengali) must ALWAYS be sized ~14% larger than their English counterpart to match visual bulk (x-height). E.g., English 28px = Bengali 32px. Never use tracking on Bengali text.",
     scale_english: {
       display:   { font: "Playfair Display", size_px: 48, weight: 700, use: "Cover titles, hero headings" },
       h1:        { font: "Playfair Display", size_px: 32, weight: 600, use: "Report headings, section titles" },
@@ -80,7 +83,7 @@ const brandTokensJSON = {
     },
     wordmark: {
       english: { font: "Playfair Display", weight: 600, tracking: "0.02em" },
-      bengali: { font: "Noto Sans Bengali", weight: 500, tracking: "0.01em" },
+      bengali: { font: "Noto Serif Bengali", weight: 600, tracking: "0em" },
     },
   },
   logo_sizes: {
@@ -163,7 +166,7 @@ const imagePrompts = [
   {
     title: "Social Profile Card (1080x1080)",
     prompt:
-      "Square social media post for Kutirchar EcoFarm (1080x1080px). Dark green background (#0B4F2A), white circular logo centered, 'Kutirchar EcoFarm' in Playfair Display serif font, Bengali name below in Noto Sans Bengali, tagline 'Smart Cattle & Circular Energy Ecosystem' in Inter. Clean, premium, no decorations.",
+      "Square social media post for Kutirchar EcoFarm (1080x1080px). Dark green background (#0B4F2A), white circular logo centered, 'Kutirchar EcoFarm' in Playfair Display serif font, Bengali name below in Noto Serif Bengali (matched serif sibling, same size), tagline 'Smart Cattle & Circular Energy Ecosystem' in Inter. Clean, premium, no decorations.",
   },
   {
     title: "Farm Signage Mockup",
@@ -316,7 +319,7 @@ export function Section13AIAgentTokens() {
         <div className="space-y-3">
           {contentRules.map((item, i) => (
             <div key={i} className="flex items-start gap-3 p-3 rounded-lg" style={{ background: i % 2 === 0 ? "#f7fbf8" : "white", border: "1px solid #e5eee9" }}>
-              <span style={{ fontFamily: "'Inter', monospace", fontSize: 11, color: "#4F9A3D", fontWeight: 800, flexShrink: 0, minWidth: 20, marginTop: 1 }}>{String(i + 1).padStart(2, "0")}</span>
+              <span style={{ fontFamily: "'Inter', monospace", fontSize: 11, color: "#1F6B3A", fontWeight: 800, flexShrink: 0, minWidth: 20, marginTop: 1 }}>{String(i + 1).padStart(2, "0")}</span>
               <div>
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 700, color: "#1E2420", marginBottom: 2 }}>{item.rule}</p>
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#666", lineHeight: 1.55 }}>{item.detail}</p>

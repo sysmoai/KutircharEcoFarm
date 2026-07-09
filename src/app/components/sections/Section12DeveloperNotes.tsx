@@ -52,8 +52,7 @@ export function Section12DeveloperNotes() {
           </div>
           <div className="space-y-3">
             <InfoRow label="Location" value="Kutirchar, Bhadraghat, Kamarkhanda, Sirajganj, Bangladesh" />
-            <InfoRow label="Website (Primary)" value="kutircharecofarm.com" />
-            <InfoRow label="Website (Secondary)" value="kutircharecofarm.bd" />
+            <InfoRow label="Website" value="kutircharecofarm.com" />
             <InfoRow label="Email" value="info@kutircharecofarm.com" />
             <InfoRow label="Zone A" value="10 decimal private/core land" />
             <InfoRow label="Zone B" value="12 decimal non-private/ejmali — removable use only" />
@@ -70,9 +69,9 @@ export function Section12DeveloperNotes() {
             <NameRow label="Official Bengali" value="কুটিরচর ইকোফার্ম" valid bangla />
             <NameRow label="Wrong — split surname" value="Kutir Char EcoFarm" valid={false} />
             <NameRow label="Wrong — split product" value="Kutirchar Eco Farm" valid={false} />
-            <NameRow label="Wrong — old internal name" value="Prangan Farm" valid={false} />
+            <NameRow label="Wrong — all lowercase" value="kutirchar ecofarm" valid={false} />
             <NameRow label="Wrong — alternate name" value="Kutirchar Smart Farm" valid={false} />
-            <NameRow label="Wrong — personal name" value="Emon Farm / Kimon" valid={false} />
+            <NameRow label="Wrong — abbreviation" value="KEF / K-Farm" valid={false} />
           </div>
         </Card>
 
@@ -93,7 +92,7 @@ export function Section12DeveloperNotes() {
                 <span style={{ color: "#1F6B3A", fontWeight: 700, flexShrink: 0, fontSize: 13 }}>→</span>
                 <div>
                   <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 13, fontWeight: 600, color: "#1F6B3A", display: "block" }}>{item.sub}</span>
-                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#888" }}>{item.note}</span>
+                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#6b7280" }}>{item.note}</span>
                 </div>
               </div>
             ))}
@@ -157,7 +156,7 @@ export function Section12DeveloperNotes() {
       <Card label="Design Token Reference" className="mb-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 700, color: "#4F9A3D", letterSpacing: "0.08em", marginBottom: 8, textTransform: "uppercase" as const }}>Colors</p>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 700, color: "#1F6B3A", letterSpacing: "0.08em", marginBottom: 8, textTransform: "uppercase" as const }}>Colors</p>
             {[
               ["--color-kutirchar-green", "#1F6B3A", "Primary identity"],
               ["--color-deep-farm-green", "#0B4F2A", "Dark surfaces"],
@@ -166,11 +165,14 @@ export function Section12DeveloperNotes() {
               ["--color-document-ivory", "#FAF7EF", "Page backgrounds"],
               ["--color-charcoal-text", "#1E2420", "Body text"],
               ["--color-solar-gold", "#F2B544", "Solar/energy accent"],
+              ["--color-verification-yellow", "#F4C430", "Verified-status badges only"],
               ["--color-river-blue", "#2E6F8E", "Water/solar accent"],
               ["--color-soil-brown", "#4A2F1B", "Document/stamp"],
               ["--color-bio-olive", "#708238", "Biogas/organic"],
+              ["--color-bio-olive-deep", "#5E6E30", "AA olive for small text"],
               ["--color-risk-red", "#B42318", "Stop-rule UI only"],
-            ].map(([token, hex, note]) => (
+              ["--color-gov-gray", "#4B5563", "Governance/meta text"],
+            ].map(([token, hex]) => (
               <div key={token} className="flex items-center gap-2 py-0.5">
                 <div style={{ width: 10, height: 10, borderRadius: 2, background: hex, flexShrink: 0, border: "1px solid rgba(0,0,0,0.1)" }} />
                 <code style={{ fontFamily: "'Inter', monospace", fontSize: 10, color: "#555", flex: 1 }}>{token}</code>
@@ -179,7 +181,7 @@ export function Section12DeveloperNotes() {
             ))}
           </div>
           <div>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 700, color: "#4F9A3D", letterSpacing: "0.08em", marginBottom: 8, textTransform: "uppercase" as const }}>Typography</p>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 700, color: "#1F6B3A", letterSpacing: "0.08em", marginBottom: 8, textTransform: "uppercase" as const }}>Typography</p>
             {[
               ["--font-brand-serif", "'Playfair Display', Georgia, serif"],
               ["--font-ui-sans", "'Inter', 'Manrope', sans-serif"],
@@ -188,11 +190,11 @@ export function Section12DeveloperNotes() {
               ["--font-alt-ui", "'Source Sans 3', sans-serif"],
             ].map(([token, value]) => (
               <div key={token} className="py-1" style={{ borderBottom: "1px solid #f0f4f1" }}>
-                <code style={{ fontFamily: "'Inter', monospace", fontSize: 10, color: "#888", display: "block" }}>{token}:</code>
+                <code style={{ fontFamily: "'Inter', monospace", fontSize: 10, color: "#6b7280", display: "block" }}>{token}:</code>
                 <code style={{ fontFamily: "'Inter', monospace", fontSize: 10, color: "#1F6B3A" }}>{value}</code>
               </div>
             ))}
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 700, color: "#4F9A3D", letterSpacing: "0.08em", marginBottom: 8, marginTop: 16, textTransform: "uppercase" as const }}>Logo Minimum Sizes</p>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 700, color: "#1F6B3A", letterSpacing: "0.08em", marginBottom: 8, marginTop: 16, textTransform: "uppercase" as const }}>Logo Minimum Sizes</p>
             {[
               ["Favicon", "16px"],
               ["Web nav", "32px icon / 120px full logo"],
@@ -260,9 +262,9 @@ export function Section12DeveloperNotes() {
 function InfoRow({ label, value, highlight, bangla }: { label: string; value: string; highlight?: boolean; bangla?: boolean }) {
   return (
     <div className="flex items-start gap-3 py-1.5" style={{ borderBottom: "1px solid #f0f4f1" }}>
-      <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#999", minWidth: 140, flexShrink: 0, paddingTop: 1 }}>{label}</span>
+      <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#6b7280", minWidth: 140, flexShrink: 0, paddingTop: 1 }}>{label}</span>
       <span style={{
-        fontFamily: bangla ? "'Noto Sans Bengali', sans-serif" : highlight ? "'Playfair Display', serif" : "'Inter', sans-serif",
+        fontFamily: bangla ? "'Noto Serif Bengali', Georgia, serif" : highlight ? "'Playfair Display', serif" : "'Inter', sans-serif",
         fontSize: bangla ? 14 : highlight ? 14 : 12,
         fontWeight: highlight ? 600 : 500,
         color: highlight ? "#1F6B3A" : "#1E2420",
@@ -276,8 +278,8 @@ function NameRow({ label, value, valid, bangla }: { label: string; value: string
   return (
     <div className="flex items-center gap-3 py-1.5" style={{ borderBottom: "1px solid #f0f4f1" }}>
       <span style={{ fontSize: 13, color: valid ? "#1F6B3A" : "#B42318", flexShrink: 0, fontWeight: 700 }}>{valid ? "✓" : "✕"}</span>
-      <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#888", minWidth: 110, flexShrink: 0 }}>{label}</span>
-      <span style={{ fontFamily: bangla ? "'Noto Sans Bengali', sans-serif" : "'Playfair Display', serif", fontSize: 13, fontWeight: 600, color: valid ? "#1F6B3A" : "#B42318" }}>{value}</span>
+      <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#6b7280", minWidth: 110, flexShrink: 0 }}>{label}</span>
+      <span style={{ fontFamily: bangla ? "'Noto Serif Bengali', Georgia, serif" : "'Playfair Display', serif", fontSize: 13, fontWeight: 600, color: valid ? "#1F6B3A" : "#B42318" }}>{value}</span>
     </div>
   );
 }

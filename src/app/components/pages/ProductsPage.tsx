@@ -1,5 +1,5 @@
 import { COLORS, FONTS } from "../../brand";
-import { PageHero, PageSection, SectionHeading, Card, StopRule, CtaButton } from "../shared/Shared";
+import { PageHero, PageSection, Card, StopRule, CtaButton } from "../shared/Shared";
 import { PhaseChip } from "../shared/PhaseChip";
 
 const products = {
@@ -100,10 +100,10 @@ export function ProductsPage() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20, marginBottom: 28 }}>
           {products.later.map((item) => (
             <Card key={item.title} style={{ opacity: 0.75 }}>
-              <p style={{ fontFamily: FONTS.sans, fontSize: 14, fontWeight: 700, color: "#888", margin: "0 0 8px" }}>{item.title}</p>
-              <p style={{ fontFamily: FONTS.sans, fontSize: 13, color: "#888", lineHeight: 1.65, margin: "0 0 12px" }}>{item.body}</p>
+              <p style={{ fontFamily: FONTS.sans, fontSize: 14, fontWeight: 700, color: "#6b7280", margin: "0 0 8px" }}>{item.title}</p>
+              <p style={{ fontFamily: FONTS.sans, fontSize: 13, color: "#6b7280", lineHeight: 1.65, margin: "0 0 12px" }}>{item.body}</p>
               <div style={{ background: "#f5f6ee", border: "1px solid #cdd4a8", borderRadius: 8, padding: "8px 12px" }}>
-                <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.bioOlive, fontWeight: 600, margin: 0 }}>🔒 {item.gated}</p>
+                <p style={{ fontFamily: FONTS.sans, fontSize: 11, color: COLORS.bioOliveDeep, fontWeight: 600, margin: 0 }}>🔒 {item.gated}</p>
               </div>
             </Card>
           ))}

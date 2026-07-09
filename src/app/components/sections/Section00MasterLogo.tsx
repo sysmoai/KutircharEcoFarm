@@ -54,11 +54,14 @@ export function Section00MasterLogo() {
 }
 
 function NoteItem({ icon, label, note, color }: { icon: string; label: string; note: string; color: string }) {
+  // The element's brand color is carried by the left-border accent (non-text, meets
+  // 3:1) so the label text can stay charcoal and meet WCAG AA at 13px — some brand
+  // colors (solar gold, field green, olive) fail 4.5:1 as small text on this tint.
   return (
-    <div className="flex gap-3 p-3 rounded-lg" style={{ background: "#f8fdf9", border: "1px solid #e0eed5" }}>
+    <div className="flex gap-3 p-3 rounded-lg" style={{ background: "#f8fdf9", border: "1px solid #e0eed5", borderLeft: `3px solid ${color}` }}>
       <div className="text-xl mt-0.5">{icon}</div>
       <div>
-        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color, marginBottom: 2 }}>{label}</p>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color: "#1E2420", marginBottom: 2 }}>{label}</p>
         <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#555", lineHeight: 1.5 }}>{note}</p>
       </div>
     </div>
@@ -69,7 +72,7 @@ export function SectionHeader({ num, title, desc }: { num: string; title: string
   return (
     <div className="mb-8">
       <div className="flex items-center gap-3 mb-2">
-        <span style={{ fontFamily: "'Inter', monospace", fontSize: 12, color: "#4F9A3D", fontWeight: 700, letterSpacing: "0.1em", background: "#f0f9f3", padding: "2px 8px", borderRadius: 4 }}>
+        <span style={{ fontFamily: "'Inter', monospace", fontSize: 12, color: "#1F6B3A", fontWeight: 700, letterSpacing: "0.1em", background: "#f0f9f3", padding: "2px 8px", borderRadius: 4 }}>
           {num}
         </span>
         <div style={{ height: 1, width: 32, background: "#1F6B3A", opacity: 0.3 }} />
@@ -86,7 +89,7 @@ export function Card({ label, children, className = "" }: { label?: string; chil
     <div className={`rounded-xl overflow-hidden ${className}`} style={{ border: "1px solid #e5eee9", background: "#fff" }}>
       {label && (
         <div className="px-5 py-3" style={{ background: "#f7fbf8", borderBottom: "1px solid #e5eee9" }}>
-          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 600, color: "#4F9A3D", letterSpacing: "0.08em", textTransform: "uppercase" }}>{label}</span>
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 600, color: "#1F6B3A", letterSpacing: "0.08em", textTransform: "uppercase" }}>{label}</span>
         </div>
       )}
       <div className="p-5">{children}</div>

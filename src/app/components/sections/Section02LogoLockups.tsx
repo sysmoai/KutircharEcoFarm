@@ -51,8 +51,8 @@ export function Section02LogoLockups() {
                   <div style={{ textAlign: "right" }}>
                     <p style={{ fontFamily: "'Playfair Display', serif", fontSize: 13, color: "#1F6B3A", fontWeight: 600, lineHeight: 1.2 }}>Kutirchar EcoFarm</p>
                     <div style={{ height: 1, background: "#1F6B3A", opacity: 0.18, margin: "3px 0" }} />
-                    <p style={{ fontFamily: "'Noto Sans Bengali', sans-serif", fontSize: 13, fontWeight: 500, color: "#1F6B3A", lineHeight: 1.4 }}>কুটিরচর ইকোফার্ম</p>
-                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#888", marginTop: 3 }}>Smart Cattle & Circular Energy Ecosystem</p>
+                    <p style={{ fontFamily: "'Noto Serif Bengali', Georgia, serif", fontSize: 13, fontWeight: 600, color: "#1F6B3A", lineHeight: 1.4 }}>কুটিরচর ইকোফার্ম</p>
+                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#6b7280", marginTop: 3 }}>Smart Cattle & Circular Energy Ecosystem</p>
                   </div>
                 </div>
               </div>
@@ -85,7 +85,7 @@ export function Section02LogoLockups() {
 function LockupCard({ label, sub, children }: { label: string; sub: string; children: React.ReactNode }) {
   return (
     <Card label={label}>
-      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#888", marginBottom: 12 }}>{sub}</p>
+      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "#6b7280", marginBottom: 12 }}>{sub}</p>
       {children}
     </Card>
   );

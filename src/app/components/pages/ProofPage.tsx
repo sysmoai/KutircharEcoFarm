@@ -57,7 +57,7 @@ export function ProofPage() {
             </thead>
             <tbody>
               {auditRows.map((row, i) => {
-                const statusColor = row.status === "Not Started" ? "#888" : row.status === "In Progress" ? COLORS.riverBlue : row.status === "Open Gap" ? COLORS.riskRed : COLORS.bioOlive;
+                const statusColor = row.status === "Not Started" ? "#888" : row.status === "In Progress" ? COLORS.riverBlue : row.status === "Open Gap" ? COLORS.riskRed : COLORS.bioOliveDeep;
                 return (
                   <tr key={row.gap} style={{ background: i % 2 === 0 ? "#fafafa" : "white", borderBottom: "1px solid #f0f0f0" }}>
                     <td style={{ padding: "12px 16px", fontWeight: 600, color: COLORS.charcoalText }}>{row.gap}</td>

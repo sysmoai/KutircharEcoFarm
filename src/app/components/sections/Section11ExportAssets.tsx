@@ -1,4 +1,5 @@
 import { useState, useCallback, type ReactNode } from "react";
+import { BRAND } from "../../brand";
 import logoIcon from "../../../imports/image.png";
 import { SectionHeader, Card } from "./Section00MasterLogo";
 
@@ -93,6 +94,7 @@ async function dlBannerPNG(w: number, h: number, filename: string, opts: BannerO
     if (opts.showBengali) {
       // Both names SAME size — expert bilingual match
       const nameFontPx = Math.round(h * 0.075);
+      const benFontPx = Math.round(nameFontPx * 1.14); // +14% optical boost
       ctx.fillStyle = opts.textColor;
       ctx.font = `600 ${nameFontPx}px "Playfair Display", Georgia, serif`;
       ctx.fillText("Kutirchar EcoFarm", w / 2, textY);
@@ -101,7 +103,7 @@ async function dlBannerPNG(w: number, h: number, filename: string, opts: BannerO
       ctx.save(); ctx.globalAlpha = 0.20; ctx.fillStyle = opts.textColor;
       ctx.fillRect(w * 0.25, sepY, w * 0.50, 1); ctx.restore();
       ctx.fillStyle = opts.textColor;             // same color — equal standing
-      ctx.font = `500 ${nameFontPx}px "Noto Sans Bengali", sans-serif`; // SAME size
+      ctx.font = `600 ${benFontPx}px "Noto Serif Bengali", Georgia, serif`; // Upsized for optical match
       ctx.fillText("কুটিরচর ইকোফার্ম", w / 2, textY + h * 0.115);
       if (opts.showTagline) {
         ctx.fillStyle = opts.subColor;
@@ -132,6 +134,7 @@ async function dlBannerPNG(w: number, h: number, filename: string, opts: BannerO
 
     // Both names SAME size — expert bilingual match
     const namePx = Math.round(h * 0.18);
+    const benNamePx = Math.round(namePx * 1.14); // +14% optical boost
     ctx.fillStyle = opts.textColor;
     ctx.font = `600 ${namePx}px "Playfair Display", Georgia, serif`;
     ctx.fillText("Kutirchar EcoFarm", tx, tyBase);
@@ -142,7 +145,7 @@ async function dlBannerPNG(w: number, h: number, filename: string, opts: BannerO
       ctx.save(); ctx.globalAlpha = 0.20; ctx.fillStyle = opts.textColor;
       ctx.fillRect(tx, sepY2, w * 0.4, 1); ctx.restore();
       ctx.fillStyle = opts.textColor;              // equal color — equal standing
-      ctx.font = `500 ${namePx}px "Noto Sans Bengali", sans-serif`; // SAME size
+      ctx.font = `600 ${benNamePx}px "Noto Serif Bengali", Georgia, serif`; // Upsized for optical match
       ctx.fillText("কুটিরচর ইকোফার্ম", tx, tyBase + h * 0.255);
     }
     if (opts.showTagline) {
@@ -194,26 +197,21 @@ async function dlLockup(
     if (flt) ctx.filter = flt;
     ctx.drawImage(img, ix, 24, is, is);    // icon: y=24 → 174
     ctx.filter = "none"; ctx.textAlign = "center";
+    if ("letterSpacing" in ctx) { (ctx as any).letterSpacing = "0.02em"; }
 
     if (type === "stacked-bi") {
-      // Bilingual: vertically centre the full text block in the space below icon.
-      // Text block height ≈ 30*1.15 + (30*0.055*2+1) + 30*1.45 = 34.5+4.3+43.5 = 82.3px
-      // Space below icon: 420-174 = 246px → start = 174 + (246-82.3)/2 = 255.8
-      // English baseline = 255.8 + 30*0.73 = 277.7 ≈ 278
       ctx.fillStyle = tc;
       ctx.font = `600 30px "Playfair Display", Georgia, serif`;
-      ctx.fillText("Kutirchar EcoFarm", W / 2, 278);
+      ctx.fillText(BRAND.nameEn, W / 2, 278);
       drawSep(W * 0.22, W * 0.78, 285);          // separator at 278+30*0.2+1.65 = 285
       ctx.fillStyle = tc;
-      ctx.font = `500 30px "Noto Sans Bengali", sans-serif`;
-      ctx.fillText("কুটিরচর ইকোফার্ম", W / 2, 310);  // 285+1+1.65+30*0.73 = 310
+      if ("letterSpacing" in ctx) { (ctx as any).letterSpacing = "0px"; }
+      ctx.font = `600 34px "Noto Serif Bengali", Georgia, serif`; // 30px + 14% optical boost
+      ctx.fillText(BRAND.nameBn, W / 2, 310);  // 285+1+1.65+30*0.73 = 310
     } else {
-      // English only: centre single text block in space below icon.
-      // Block height ≈ 30*1.15 = 34.5px → start = 174 + (246-34.5)/2 = 279.75
-      // English baseline = 279.75 + 30*0.73 = 301.7 ≈ 302
       ctx.fillStyle = tc;
       ctx.font = `600 30px "Playfair Display", Georgia, serif`;
-      ctx.fillText("Kutirchar EcoFarm", W / 2, 302);
+      ctx.fillText(BRAND.nameEn, W / 2, 302);
     }
   } else {
     // ── Horizontal: icon left, text right ────────────────────────────────
@@ -223,28 +221,39 @@ async function dlLockup(
     ctx.filter = "none"; ctx.textAlign = "left";
 
     if (type === "bilingual") {
-      // Both at 36px — 100% equal size. Positions calibrated so the gap
-      // between names (via separator) matches BrandLogo proportions.
-      ctx.fillStyle = tc; ctx.font = `600 36px "Playfair Display", Georgia, serif`;
-      ctx.fillText("Kutirchar EcoFarm", 176, 75);
+      // Both English 36px, Bengali 41px (+14% optical boost)
+      ctx.fillStyle = tc; 
+      if ("letterSpacing" in ctx) { (ctx as any).letterSpacing = "0.02em"; }
+      ctx.font = `600 36px "Playfair Display", Georgia, serif`;
+      ctx.fillText(BRAND.nameEn, 176, 75);
       drawSep(176, W - 36, 90);              // gap: eng_bottom(82) → sep(90) = 8px ✓
-      ctx.fillStyle = tc; ctx.font = `500 36px "Noto Sans Bengali", sans-serif`;
-      ctx.fillText("কুটিরচর ইকোফার্ম", 176, 120); // sep(91)→ben_top(120-26=94) = 3px ✓
+      ctx.fillStyle = tc; 
+      if ("letterSpacing" in ctx) { (ctx as any).letterSpacing = "0px"; }
+      ctx.font = `600 41px "Noto Serif Bengali", Georgia, serif`;
+      ctx.fillText(BRAND.nameBn, 176, 120); // sep(91)→ben_top(120-26=94) = 3px ✓
 
     } else if (type === "bengali-first") {
-      // Bengali first — both at 34px equal size
-      ctx.fillStyle = tc; ctx.font = `600 34px "Noto Sans Bengali", sans-serif`;
-      ctx.fillText("কুটিরচর ইকোফার্ম", 176, 74);
+      // Bengali 39px (+14% optical boost), English 34px
+      ctx.fillStyle = tc; 
+      if ("letterSpacing" in ctx) { (ctx as any).letterSpacing = "0px"; }
+      ctx.font = `600 39px "Noto Serif Bengali", Georgia, serif`;
+      ctx.fillText(BRAND.nameBn, 176, 74);
       drawSep(176, W - 36, 89);             // gap: ben_bottom(81)→sep(89) = 8px ✓
-      ctx.fillStyle = tc; ctx.font = `500 34px "Playfair Display", Georgia, serif`;
-      ctx.fillText("Kutirchar EcoFarm", 176, 117); // sep(90)→eng_top(117-25=92)= 2px ✓
+      ctx.fillStyle = tc; 
+      if ("letterSpacing" in ctx) { (ctx as any).letterSpacing = "0.02em"; }
+      ctx.font = `600 34px "Playfair Display", Georgia, serif`;
+      ctx.fillText(BRAND.nameEn, 176, 117); // sep(90)→eng_top(117-25=92)= 2px ✓
 
     } else {
       // English only — vertically centre in H=170
-      ctx.fillStyle = tc; ctx.font = `600 42px "Playfair Display", Georgia, serif`;
-      ctx.fillText("Kutirchar EcoFarm", 176, 97);  // centred: 97 ≈ H/2 + 42*0.73/2
+      ctx.fillStyle = tc; 
+      if ("letterSpacing" in ctx) { (ctx as any).letterSpacing = "0.02em"; }
+      ctx.font = `600 42px "Playfair Display", Georgia, serif`;
+      ctx.fillText(BRAND.nameEn, 176, 97);  // centred: 97 ≈ H/2 + 42*0.73/2
     }
   }
+  
+  if ("letterSpacing" in ctx) { (ctx as any).letterSpacing = "0px"; }
   await save(c, filename);
 }
 
@@ -257,50 +266,114 @@ const SEAL_COLORS = {
   white:        { stroke: "#FFFFFF", bg: "#1F6B3A" },
 } as const;
 
-async function getBase64(filter?: string): Promise<string> {
-  const c = document.createElement("canvas"); c.width = c.height = 400;
+// ── Font embedding for seals ─────────────────────────────────────────────────
+// An SVG rasterised via new Image() renders in an isolated context WITHOUT access
+// to the page's web fonts. To keep the seal's arc text in the real brand fonts
+// (Playfair Display + Noto Serif Bengali) — and to guarantee the Bengali script
+// shapes correctly even on systems with no Bengali system font — we embed a
+// glyph-subset of each font directly into the SVG as a base64 @font-face.
+
+function ab2b64(buf: ArrayBuffer): string {
+  const bytes = new Uint8Array(buf);
+  let bin = "";
+  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+  return btoa(bin);
+}
+
+const _fontCache: Record<string, string> = {};
+
+// Fetch a single-subset @font-face (only the glyphs in `text`) and inline it.
+async function embedFont(family: string, weight: number): Promise<string> {
+  const key = `${family}|${weight}`;
+  if (_fontCache[key] !== undefined) return _fontCache[key];
+  
+  // CRITICAL FIX: We MUST NOT use the `&text=` subsetting API for Bengali. 
+  // Google Fonts subsetting strips out the GSUB/GPOS OpenType tables required for 
+  // complex script shaping (conjuncts and the continuous top 'matra').
+  // By fetching the full CSS, we retain all shaping rules so the text renders perfectly.
+  const cssUrl = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(family)}:wght@${weight}`;
+  let css = await (await fetch(cssUrl)).text();
+  
+  // Extract all WOFF2 URLs (Google splits full fonts into multiple unicode ranges)
+  const urls = Array.from(css.matchAll(/url\((https:\/\/[^)]+\.woff2)\)/g)).map(m => m[1]);
+  if (urls.length === 0) throw new Error("no woff2 url");
+  
+  const uniqueUrls = [...new Set(urls)];
+  for (const url of uniqueUrls) {
+    const buf = await (await fetch(url)).arrayBuffer();
+    const b64 = ab2b64(buf);
+    // Inject the base64 payload directly into the CSS
+    css = css.split(url).join(`data:font/woff2;base64,${b64}`);
+  }
+  
+  _fontCache[key] = css;
+  return css;
+}
+
+// Build the <style> block embedding both arc fonts. Never throws — on any
+// failure it returns "" so the seal still renders using system font fallbacks.
+async function sealFontStyle(): Promise<string> {
+  try {
+    const [eng, ben] = await Promise.all([
+      embedFont("Playfair Display", 700),
+      embedFont("Noto Serif Bengali", 600),
+    ]);
+    return `<style>${eng}${ben}</style>`;
+  } catch {
+    return "";
+  }
+}
+
+// Rasterise the master icon to a base64 PNG at `px` resolution. `px` tracks the
+// seal's output size so the embedded icon stays crisp at large PNG/SVG scales
+// (the icon fills ~0.73× the seal, so 1024 covers seals up to ~1400px).
+async function getBase64(filter?: string, px = 1024): Promise<string> {
+  const c = document.createElement("canvas"); c.width = c.height = px;
   const ctx = c.getContext("2d")!;
   const img = await loadImg(logoIcon);
   if (filter) ctx.filter = filter;
-  ctx.drawImage(img, 0, 0, 400, 400);
+  ctx.drawImage(img, 0, 0, px, px);
   ctx.filter = "none";
   return c.toDataURL("image/png");
 }
 
-function sealSVG(b64: string, stroke: string, bg: string, size = 400): string {
+function sealSVG(b64: string, stroke: string, bg: string, size = 400, fontStyle = ""): string {
   const cx = size / 2;
   const cy = size / 2;
   // ── Proportions — must match SealLogo.tsx exactly ────────────────────────
   const outerR    = size * 0.484;
   const outerR2   = size * 0.460;
-  const textR     = size * 0.400;
   const innerRing = size * 0.336;
-  const iconClipR = innerRing - size * 0.004;
+  const topTextR  = size * 0.376;
+  const botTextR  = size * 0.376; // matched to topTextR — Bengali anchored via dominant-baseline="hanging"
+  const dotDist   = size * 0.398;
+  const iconClipR = innerRing - size * 0.015;
   const iconW     = iconClipR / 0.46;          // logo circle fills clip field
   const iconX     = cx - iconW / 2;
   const iconY     = cy - iconW / 2;
   const dotR      = size * 0.0220;
   const engSize   = size * 0.0610;
-  const benSize   = size * 0.0530;
+  const benSize   = size * 0.0680; // +11% optical boost — matches SealLogo.tsx benFontSize
   const engSpc    = size * 0.0175;
-  const benSpc    = size * 0.0110;
+  const benSpc    = 0; // ZERO tracking for Bengali to prevent broken conjuncts
   return `<?xml version="1.0" encoding="UTF-8"?>
-<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kutirchar EcoFarm official seal — কুটিরচর ইকোফার্ম">
+<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${BRAND.nameEn} official seal — ${BRAND.nameBn}">
   <defs>
-    <path id="t" d="M ${cx-textR},${cy} A ${textR},${textR} 0 0,1 ${cx+textR},${cy}"/>
-    <path id="b" d="M ${cx-textR},${cy} A ${textR},${textR} 0 0,0 ${cx+textR},${cy}"/>
+    ${fontStyle}
+    <path id="t" d="M ${cx-topTextR},${cy} A ${topTextR},${topTextR} 0 0,1 ${cx+topTextR},${cy}"/>
+    <path id="b" d="M ${cx-botTextR},${cy} A ${botTextR},${botTextR} 0 0,0 ${cx+botTextR},${cy}"/>
     <clipPath id="ic"><circle cx="${cx}" cy="${cy}" r="${iconClipR}"/></clipPath>
   </defs>
   <circle cx="${cx}" cy="${cy}" r="${outerR}" fill="${bg}"/>
   <circle cx="${cx}" cy="${cy}" r="${outerR}" fill="none" stroke="${stroke}" stroke-width="${size*0.023}"/>
   <circle cx="${cx}" cy="${cy}" r="${outerR2}" fill="none" stroke="${stroke}" stroke-width="${size*0.004}"/>
-  <circle cx="${cx-textR}" cy="${cy}" r="${dotR}" fill="${stroke}"/>
-  <circle cx="${cx+textR}" cy="${cy}" r="${dotR}" fill="${stroke}"/>
-  <text font-family="'Playfair Display',Georgia,'Times New Roman',serif" font-size="${engSize}" font-weight="700" fill="${stroke}" letter-spacing="${engSpc}">
-    <textPath href="#t" startOffset="50%" text-anchor="middle">KUTIRCHAR ECOFARM</textPath>
+  <circle cx="${cx-dotDist}" cy="${cy}" r="${dotR}" fill="${stroke}"/>
+  <circle cx="${cx+dotDist}" cy="${cy}" r="${dotR}" fill="${stroke}"/>
+  <text font-family="'Playfair Display',Georgia,'Times New Roman',serif" font-size="${engSize}" font-weight="700" fill="${stroke}" letter-spacing="${engSpc}" text-rendering="geometricPrecision">
+    <textPath href="#t" startOffset="50%" text-anchor="middle">${BRAND.nameEn.toUpperCase()}</textPath>
   </text>
-  <text font-family="'Noto Sans Bengali','Noto Serif Bengali',sans-serif" font-size="${benSize}" font-weight="600" fill="${stroke}" letter-spacing="${benSpc}">
-    <textPath href="#b" startOffset="50%" text-anchor="middle">কুটিরচর ইকোফার্ম</textPath>
+  <text font-family="'Noto Serif Bengali',Georgia,'Times New Roman',serif" font-size="${benSize}" font-weight="600" fill="${stroke}" letter-spacing="${benSpc}" text-rendering="geometricPrecision" dominant-baseline="hanging">
+    <textPath href="#b" startOffset="50%" text-anchor="middle">${BRAND.nameBn}</textPath>
   </text>
   <circle cx="${cx}" cy="${cy}" r="${innerRing}" fill="${bg}" stroke="${stroke}" stroke-width="${size*0.008}"/>
   <image href="${b64}" x="${iconX}" y="${iconY}" width="${iconW}" height="${iconW}" clip-path="url(#ic)"/>
@@ -309,8 +382,8 @@ function sealSVG(b64: string, stroke: string, bg: string, size = 400): string {
 
 async function dlSealSVG(mode: keyof typeof SEAL_COLORS) {
   const { stroke, bg } = SEAL_COLORS[mode];
-  const b64 = await getBase64(FILTERS[mode]);
-  const svg = sealSVG(b64, stroke, bg);
+  const [b64, fontStyle] = await Promise.all([getBase64(FILTERS[mode]), sealFontStyle()]);
+  const svg = sealSVG(b64, stroke, bg, 400, fontStyle);
   const url = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
   const a = document.createElement("a"); a.href = url;
   a.download = `kutirchar-ecofarm-seal-${mode}.svg`;
@@ -319,9 +392,11 @@ async function dlSealSVG(mode: keyof typeof SEAL_COLORS) {
 }
 
 async function dlSealPNG(mode: keyof typeof SEAL_COLORS, size: number) {
+  await document.fonts.ready;
   const { stroke, bg } = SEAL_COLORS[mode];
-  const b64 = await getBase64(FILTERS[mode]);
-  const svgStr = sealSVG(b64, stroke, bg, size);
+  // Icon fills ~0.73× the seal; embed at ≥ that resolution so it stays crisp.
+  const [b64, fontStyle] = await Promise.all([getBase64(FILTERS[mode], Math.max(1024, Math.ceil(size * 0.75))), sealFontStyle()]);
+  const svgStr = sealSVG(b64, stroke, bg, size, fontStyle);
   const svgUrl = URL.createObjectURL(new Blob([svgStr], { type: "image/svg+xml" }));
   const svgImg = await loadImg(svgUrl);
   URL.revokeObjectURL(svgUrl);
@@ -353,15 +428,23 @@ export function Section11ExportAssets() {
 
   function Btn({ id, label, fn, wide }: { id: string; label?: string; fn: () => Promise<void>; wide?: boolean }) {
     const st = status[id] ?? "idle";
-    const txt = { idle: label ?? "↓ Download", busy: "...", done: "✓ Done", error: "✕ Error" }[st];
-    const col = { idle: "#1F6B3A", busy: "#708238", done: "#0B4F2A", error: "#B42318" }[st];
+    const txt = { idle: label ?? "↓ Download PNG", busy: "Generating...", done: "✓ Saved", error: "✕ Failed" }[st];
+    
     return (
       <button onClick={() => run(id, fn)} disabled={st === "busy"}
-        style={{ background: st === "done" ? "#f0f9f3" : "transparent", border: `1.5px solid ${col}`, color: col,
-          borderRadius: 6, padding: wide ? "7px 18px" : "5px 13px",
-          fontFamily: "'Inter',sans-serif", fontSize: 11, fontWeight: 600,
+        style={{ 
+          background: st === "done" ? "#f0f9f3" : st === "busy" ? "#fafafa" : "#ffffff", 
+          border: st === "done" ? "1px solid #c0ddc8" : "1px solid #cce8d6", 
+          color: st === "done" ? "#0B4F2A" : st === "busy" ? "#888" : "#1F6B3A",
+          borderRadius: 8, padding: wide ? "9px 22px" : "7px 16px",
+          fontFamily: "'Inter',sans-serif", fontSize: 12, fontWeight: 600,
           cursor: st === "busy" ? "wait" : "pointer", transition: "all 0.15s",
-          whiteSpace: "nowrap" as const, letterSpacing: "0.03em" }}>
+          whiteSpace: "nowrap" as const, letterSpacing: "0.02em",
+          boxShadow: st === "idle" ? "0 1px 3px rgba(31,107,58,0.08)" : "none" 
+        }}
+        onMouseEnter={(e) => { if(st === "idle") { e.currentTarget.style.background = "#f0fdf4"; e.currentTarget.style.borderColor = "#a3d3b6"; } }}
+        onMouseLeave={(e) => { if(st === "idle") { e.currentTarget.style.background = "#ffffff"; e.currentTarget.style.borderColor = "#cce8d6"; } }}
+      >
         {txt}
       </button>
     );
@@ -384,12 +467,17 @@ export function Section11ExportAssets() {
       <SectionHeader num="11" title="Export Assets" desc="Download every brand asset directly from the browser — platform-ready social media files, high-resolution icon packs, logo lockups with text, SVG seals, and favicon sets. All generated live from the master icon." />
 
       {/* Tab Nav */}
-      <div className="flex flex-wrap gap-2 mb-6">
+      <div className="flex flex-wrap gap-1 mb-8 p-1.5 rounded-xl w-fit" style={{ background: "#f0fdf4", border: "1px solid #cce8d6" }}>
         {tabs.map((t) => (
           <button key={t.id} onClick={() => setTab(t.id)}
-            style={{ background: tab === t.id ? "#1F6B3A" : "transparent", color: tab === t.id ? "white" : "#1F6B3A",
-              border: "1.5px solid #1F6B3A", borderRadius: 8, padding: "7px 18px",
-              fontFamily: "'Inter',sans-serif", fontSize: 12, fontWeight: 600, cursor: "pointer", transition: "all 0.15s" }}>
+            style={{
+              background: tab === t.id ? "#1F6B3A" : "transparent",
+              color: tab === t.id ? "white" : "#2F4F3D",
+              borderRadius: 8, padding: "8px 20px",
+              fontFamily: "'Inter',sans-serif", fontSize: 13, fontWeight: 600,
+              cursor: "pointer", transition: "all 0.2s ease-in-out",
+              boxShadow: tab === t.id ? "0 2px 4px rgba(31,107,58,0.2)" : "none"
+            }}>
             {t.label}
           </button>
         ))}
@@ -541,7 +629,7 @@ export function Section11ExportAssets() {
       {/* ── LOCKUPS TAB ── */}
       {tab === "lockups" && (
         <Card label="Logo Lockups — Icon + Text (PNG @2x)">
-          <p style={{ fontFamily: "'Inter',sans-serif", fontSize: 12, color: "#666", marginBottom: 16 }}>Rendered with Playfair Display (English) + Noto Sans Bengali. Exported @2x for retina quality.</p>
+          <p style={{ fontFamily: "'Inter',sans-serif", fontSize: 12, color: "#666", marginBottom: 16 }}>Rendered with Playfair Display (English) + Noto Serif Bengali (Bangla) — matched serif siblings. Exported @2x for retina quality.</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {([
               // ── Horizontal lockups ──────────────────────────────────────────
@@ -598,7 +686,7 @@ export function Section11ExportAssets() {
       {/* ── SEAL TAB ── */}
       {tab === "seal" && (
         <Card label="Seal / Stamp Pack">
-          <p style={{ fontFamily:"'Inter',sans-serif", fontSize:12, color:"#666", marginBottom:16 }}>SVG seals are self-contained vector files. PNG seals are rasterized from SVG at the specified pixel size.</p>
+          <p style={{ fontFamily:"'Inter',sans-serif", fontSize:12, color:"#666", marginBottom:16 }}>SVG seals are fully self-contained — the brand arc fonts (Playfair Display + Noto Serif Bengali) are embedded, so they render identically in any tool even without the fonts installed. PNG seals are rasterized from the same source at the specified pixel size.</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {(["color","dark-green","black","white"] as const).map(mode => (
               <div key={mode} className="p-4 rounded-lg" style={{ background: SEAL_COLORS[mode].bg, border:"1px solid #e0eed5" }}>
@@ -677,9 +765,12 @@ function PlatformHint({ text }: { text: string }) {
 }
 
 function Thumb({ src, size, round, bg, filter }: { src: string; size: number; round?: boolean; bg?: string; filter?: string }) {
+  // Use a subtle checkerboard pattern for transparent backgrounds so users can see the transparency
+  const bgStyle = bg || `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><rect width="4" height="4" fill="%23f0f0f0"/><rect x="4" y="4" width="4" height="4" fill="%23f0f0f0"/><rect x="4" width="4" height="4" fill="%23ffffff"/><rect y="4" width="4" height="4" fill="%23ffffff"/></svg>')`;
+
   return (
-    <div style={{ width:size, height:size, borderRadius: round ? "50%" : 8, overflow:"hidden", background: bg || "#FAF7EF", border:"1px solid #e0eed5", flexShrink:0, display:"flex", alignItems:"center", justifyContent:"center" }}>
-      <img src={src} alt="" style={{ width:"90%", height:"90%", objectFit:"contain", filter }} />
+    <div style={{ width:size, height:size, borderRadius: round ? "50%" : 8, overflow:"hidden", background: bgStyle, border: bg ? "none" : "1px solid #e0eed5", flexShrink:0, display:"flex", alignItems:"center", justifyContent:"center", boxShadow: "inset 0 1px 3px rgba(0,0,0,0.05)" }}>
+      <img src={src} alt="" style={{ width:"85%", height:"85%", objectFit:"contain", filter }} />
     </div>
   );
 }
@@ -689,9 +780,9 @@ function BannerThumb({ w, h, bg }: { w: number; h: number; bg: string }) {
   const iconFilter = isLight ? undefined : "brightness(0) invert(1)";
   const iconSize = Math.round(Math.min(h, w) * 0.65);
   return (
-    <div style={{ width:w, height:h, borderRadius:4, background:bg,
-      border: isLight ? "1.5px solid #c0ddc8" : "1px solid transparent",
-      flexShrink:0, display:"flex", alignItems:"center", justifyContent:"center", overflow:"hidden" }}>
+    <div style={{ width:w, height:h, borderRadius:6, background:bg,
+      border: isLight ? "1px solid #d0e0d5" : "1px solid transparent",
+      flexShrink:0, display:"flex", alignItems:"center", justifyContent:"center", overflow:"hidden", boxShadow: "0 2px 5px rgba(0,0,0,0.06)" }}>
       <img src={logoIcon} alt="" style={{ width:iconSize, height:iconSize, objectFit:"contain", filter: iconFilter, opacity: isLight ? 0.85 : 0.9 }} />
     </div>
   );
@@ -704,20 +795,28 @@ function AssetRow({ id, label, size, sub, fn, run, status, preview }: {
   preview: ReactNode;
 }) {
   const st = status[id] ?? "idle";
-  const txt = { idle:"↓ Download", busy:"...", done:"✓ Done", error:"✕ Error" }[st];
-  const col = { idle:"#1F6B3A", busy:"#708238", done:"#0B4F2A", error:"#B42318" }[st];
+  const txt = { idle:"↓ Download PNG", busy:"Generating...", done:"✓ Saved", error:"✕ Failed" }[st];
+  
   return (
-    <div className="flex items-center gap-3 p-3 rounded-lg" style={{ background:"#f7fbf8", border:"1px solid #e0eed5" }}>
+    <div className="flex items-center gap-4 p-4 rounded-xl transition-all duration-200" 
+         style={{ background:"#ffffff", border:"1px solid #e0eed5", boxShadow: "0 2px 8px rgba(0,0,0,0.02)" }}
+         onMouseEnter={(e) => e.currentTarget.style.borderColor = "#c0ddc8"}
+         onMouseLeave={(e) => e.currentTarget.style.borderColor = "#e0eed5"}>
       {preview}
       <div style={{ flex:1, minWidth:0 }}>
-        <p style={{ fontFamily:"'Inter',sans-serif", fontSize:12, fontWeight:600, color:"#1E2420" }}>{label}</p>
-        <p style={{ fontFamily:"'Inter',monospace", fontSize:10, color:"#1F6B3A", fontWeight:600 }}>{size}</p>
-        <p style={{ fontFamily:"'Inter',sans-serif", fontSize:10, color:"#aaa" }}>{sub}</p>
+        <div className="flex items-center gap-2 mb-1">
+          <p style={{ fontFamily:"'Inter',sans-serif", fontSize:13, fontWeight:700, color:"#1E2420" }}>{label}</p>
+          <span style={{ fontFamily:"'Inter',monospace", fontSize:10, color:"#1F6B3A", fontWeight:700, background:"#f0f9f3", padding:"2px 6px", borderRadius:4, letterSpacing:"0.04em" }}>{size}</span>
+        </div>
+        <p style={{ fontFamily:"'Inter',sans-serif", fontSize:11, color:"#6b7280", lineHeight: 1.4 }}>{sub}</p>
       </div>
       <button onClick={() => run(id, fn)} disabled={st === "busy"}
-        style={{ background: st === "done" ? "#f0f9f3" : "transparent", border:`1.5px solid ${col}`, color:col,
-          borderRadius:6, padding:"5px 12px", fontFamily:"'Inter',sans-serif", fontSize:11, fontWeight:600,
-          cursor: st === "busy" ? "wait" : "pointer", transition:"all 0.15s", whiteSpace:"nowrap" as const, flexShrink:0 }}>
+        style={{ background: st === "done" ? "#f0f9f3" : st === "busy" ? "#fafafa" : "#1F6B3A", 
+          border: st === "done" ? "1px solid #c0ddc8" : "1px solid transparent",
+          color: st === "done" ? "#0B4F2A" : st === "busy" ? "#888" : "#ffffff",
+          borderRadius: 8, padding:"8px 16px", fontFamily:"'Inter',sans-serif", fontSize:12, fontWeight:600,
+          cursor: st === "busy" ? "wait" : "pointer", transition:"all 0.15s", whiteSpace:"nowrap" as const, flexShrink:0,
+          boxShadow: st === "idle" ? "0 2px 6px rgba(31,107,58,0.2)" : "none" }}>
         {txt}
       </button>
     </div>

@@ -18,7 +18,7 @@ const systems = [
     gates: ["Load calculation complete (CCTV + router + NVR)", "Battery capacity + grounding plan ready", "UPS connection verified with solar output"],
     outputs: ["Continuous monitoring during outages", "Protects NVR from data loss", "Extends farm operations during load-shedding"],
   },
-  { icon: "🌐", title: "Network & Router", phase: "Next" as const, color: COLORS.bioOlive,
+  { icon: "🌐", title: "Network & Router", phase: "Next" as const, color: COLORS.bioOliveDeep,
     desc: "Local network setup for NVR, cameras, and monitoring devices. Starlink as WAN when available.",
     gates: ["Device inventory complete", "Cable routing plan for barn + biogas area", "Router/switch placement decided"],
     outputs: ["Local LAN for all monitoring devices", "Isolated network for security cameras", "Scalable for future devices"],
@@ -78,7 +78,7 @@ export function DigitalPage() {
               </div>
               <p style={{ fontFamily: FONTS.sans, fontSize: 13, color: "#555", lineHeight: 1.65, margin: "0 0 14px" }}>{sys.desc}</p>
 
-              <p style={{ fontFamily: FONTS.sans, fontSize: 11, fontWeight: 700, color: "#888", textTransform: "uppercase" as const, letterSpacing: "0.06em", marginBottom: 6 }}>Verification Gates</p>
+              <p style={{ fontFamily: FONTS.sans, fontSize: 11, fontWeight: 700, color: "#6b7280", textTransform: "uppercase" as const, letterSpacing: "0.06em", marginBottom: 6 }}>Verification Gates</p>
               {sys.gates.map((g) => (
                 <div key={g} style={{ display: "flex", gap: 8, marginBottom: 4 }}>
                   <span style={{ color: COLORS.riskRed, flexShrink: 0, fontSize: 12, marginTop: 1 }}>○</span>
@@ -87,7 +87,7 @@ export function DigitalPage() {
               ))}
 
               <div style={{ borderTop: "1px solid #f0f0f0", marginTop: 12, paddingTop: 12 }}>
-                <p style={{ fontFamily: FONTS.sans, fontSize: 11, fontWeight: 700, color: "#888", textTransform: "uppercase" as const, letterSpacing: "0.06em", marginBottom: 6 }}>Outputs</p>
+                <p style={{ fontFamily: FONTS.sans, fontSize: 11, fontWeight: 700, color: "#6b7280", textTransform: "uppercase" as const, letterSpacing: "0.06em", marginBottom: 6 }}>Outputs</p>
                 {sys.outputs.map((o) => (
                   <div key={o} style={{ display: "flex", gap: 8, marginBottom: 4 }}>
                     <span style={{ color: COLORS.kutircharGreen, flexShrink: 0, fontSize: 12 }}>✓</span>

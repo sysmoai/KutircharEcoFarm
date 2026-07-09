@@ -13,6 +13,27 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   outline-offset: 2px;
 }
 input, select, textarea, button { font-family: inherit; }
+/* Skip-to-content link — hidden until focused via keyboard */
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -48px;
+  z-index: 200;
+  background: #F2B544;
+  color: #0B4F2A;
+  font-family: 'Inter', 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 9px 16px;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid #0B4F2A;
+  outline-offset: 2px;
+}
 input:focus, select:focus, textarea:focus {
   border-color: #1F6B3A !important;
   box-shadow: 0 0 0 3px rgba(31,107,58,0.12);

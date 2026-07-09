@@ -78,7 +78,7 @@ export function Section03IconSystem() {
                 <img src={logoIcon} alt={`${s}px`} style={{ width: s, height: s, objectFit: "contain", imageRendering: s <= 32 ? "pixelated" : "auto" }} />
               </div>
               <span style={{ fontFamily: "'Inter', monospace", fontSize: 11, color: "#666" }}>{s}px</span>
-              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#999" }}>
+              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#6b7280" }}>
                 {s <= 16 ? "Browser tab" : s <= 32 ? "Desktop shortcut" : s <= 48 ? "Web app" : "High DPI"}
               </span>
             </div>
@@ -97,7 +97,7 @@ export function Section03IconSystem() {
             </div>
           ))}
         </div>
-        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#888", marginTop: 12, lineHeight: 1.5 }}>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#6b7280", marginTop: 12, lineHeight: 1.5 }}>
           Export 1024×1024px master. Generate 512, 256, 128, 64, 48, 32, 16px from the master. Always export on transparent background (PNG) and white background (PNG) versions.
         </p>
       </Card>
