@@ -1,0 +1,139 @@
+{
+  "lang": "en",
+  "langName": "English",
+  "dir": "ltr",
+  "brand": {
+    "nameEn": "Kutirchar EcoFarm",
+    "nameBn": "কুটিরচর ইকোফার্ম",
+    "tagline": "Smart Cattle & Circular Energy Ecosystem",
+    "shortDesc": "Dairy · Biogas · Solar · Silage",
+    "phase": "Verification & Foundation Phase",
+    "phaseEn": "Verification & Foundation Phase"
+  },
+  "nav": {
+    "home": "Home",
+    "project": "The Project",
+    "proof": "Proof & Governance",
+    "ecosystem": "Ecosystem",
+    "products": "Products & Services",
+    "digital": "Digital Infra",
+    "updates": "Updates",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "privacy": "Privacy",
+    "executiveSummary": "Executive Summary",
+    "brandGuide": "Brand Guide",
+    "partnership": "Partnership →",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "skipToContent": "Skip to content"
+  },
+  "footer": {
+    "navigate": "Navigate",
+    "contact": "Contact",
+    "trustPolicy": "Trust Policy",
+    "privacyProtected": "All claims are phase-gated and evidence-first.",
+    "zoneBNote": "Zone B: non-private/ejmali land — removable use only.",
+    "copyright": "© 2026 Kutirchar EcoFarm — Emon Hossain.",
+    "taglineBn": "কুটিরচর ইকোফার্ম",
+    "inquiryForm": "Inquiry form",
+    "brandGuide": "Brand Guide →",
+    "executiveSummaryFn": "Executive Summary (PDF) →"
+  },
+  "common": {
+    "now": "Now",
+    "next": "Next",
+    "later": "Later",
+    "verified": "Verified",
+    "pending": "Pending",
+    "missing": "Missing",
+    "stopRule": "Stop Rule",
+    "phase": "Phase",
+    "status": "Status",
+    "evidence": "Evidence",
+    "download": "Download",
+    "submit": "Submit",
+    "view": "View",
+    "readMore": "Read More",
+    "contactUs": "Contact Us",
+    "privacy": "Privacy",
+    "openGap": "Open Gap",
+    "inProgress": "In Progress",
+    "notStarted": "Not Started",
+    "completed": "Completed",
+    "notApplicable": "N/A",
+    "home": "Home",
+    "document": "Document",
+    "request": "Request"
+  },
+  "meta": {
+    "homeTitle": "Kutirchar EcoFarm — Smart Cattle & Circular Energy Ecosystem",
+    "homeDesc": "Evidence-first smart farm in Kutirchar, Sirajganj.",
+    "projectTitle": "The Project — Kutirchar EcoFarm",
+    "projectDesc": "Proof-based smart farm with cattle, biogas, solar, silage.",
+    "proofTitle": "Proof & Governance — Kutirchar EcoFarm",
+    "proofDesc": "Bank-ready audit ledger: 7 verification gaps.",
+    "ecosystemTitle": "Circular Ecosystem — Kutirchar EcoFarm",
+    "ecosystemDesc": "Complete circular farm: livestock, biogas, bio-slurry, solar.",
+    "productsTitle": "Products & Services — Kutirchar EcoFarm",
+    "productsDesc": "Phase-gated products: Now/Next/Later.",
+    "digitalTitle": "Digital Infrastructure — Kutirchar EcoFarm",
+    "digitalDesc": "Starlink, CCTV, UPS — reliability infrastructure.",
+    "updatesTitle": "Updates & Reports — Kutirchar EcoFarm",
+    "updatesDesc": "Transparent progress updates.",
+    "contactTitle": "Contact & Partnership — Kutirchar EcoFarm",
+    "contactDesc": "Submit inquiries for bank, govt, vendor, buyer.",
+    "faqTitle": "FAQ — Kutirchar EcoFarm",
+    "faqDesc": "Common questions about the project.",
+    "privacyTitle": "Privacy Policy — Kutirchar EcoFarm",
+    "privacyDesc": "How we handle your data.",
+    "execSummaryTitle": "Executive Summary — Kutirchar EcoFarm",
+    "execSummaryDesc": "One-page Bank & Govt summary PDF."
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "body": "This page does not exist or has been moved.",
+    "goHome": "Back to Home →"
+  },
+  "home": {
+    "heroTag": "Verification & Foundation Phase",
+    "heroCta1": "Bank & Govt Pack",
+    "readOverview": "Read Full Overview",
+    "ecosystemTitle": "The Circular Ecosystem",
+    "proofTitle": "Proof & Governance",
+    "updatesTitle": "Latest Updates"
+  },
+  "project": {
+    "heroTitle": "The Project & Overview"
+  },
+  "proof": {
+    "heroTitle": "Proof & Governance",
+    "auditTitle": "Verification Audit Ledger"
+  },
+  "ecosystem": {
+    "heroTitle": "The Circular Ecosystem"
+  },
+  "products": {
+    "heroTitle": "Products & Services"
+  },
+  "digital": {
+    "heroTitle": "Digital Infrastructure"
+  },
+  "updates": {
+    "heroTitle": "Updates & Reports"
+  },
+  "contact": {
+    "heroTitle": "Contact & Partnership",
+    "formTitle": "Submit Inquiry",
+    "formSubmit": "Submit"
+  },
+  "faq": {
+    "heroTitle": "FAQ"
+  },
+  "privacy": {
+    "heroTitle": "Privacy Policy"
+  },
+  "execSummary": {
+    "heroTitle": "Executive Summary"
+  }
+}
