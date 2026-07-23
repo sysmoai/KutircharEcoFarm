@@ -1,24 +1,21 @@
-import { Link } from "react-router";
+import React from "react";
 import { COLORS, FONTS } from "../../brand";
+import { PageHero, PageSection, CtaButton } from "../shared/Shared";
+import { useT } from "../shared/i18n";
 
 export function NotFound() {
+  const T = useT();
   return (
-    <div style={{ minHeight: "60vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "48px 24px", textAlign: "center", background: COLORS.documentIvory }}>
-      <div>
-        <p style={{ fontFamily: FONTS.serif, fontSize: 80, fontWeight: 700, color: COLORS.fieldMist, margin: "0 0 8px", lineHeight: 1 }}>404</p>
-        <h1 style={{ fontFamily: FONTS.serif, fontSize: 28, color: COLORS.charcoalText, margin: "0 0 12px" }}>Page Not Found</h1>
-        <p style={{ fontFamily: FONTS.sans, fontSize: 15, color: "#666", margin: "0 0 28px", lineHeight: 1.65 }}>
-          The page you are looking for does not exist or has been moved.
-        </p>
-        <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-          <Link to="/" style={{ background: COLORS.kutircharGreen, color: "white", fontFamily: FONTS.sans, fontSize: 14, fontWeight: 700, padding: "11px 22px", borderRadius: 10, textDecoration: "none" }}>
-            ← Go Home
-          </Link>
-          <Link to="/contact" style={{ background: "transparent", color: COLORS.kutircharGreen, fontFamily: FONTS.sans, fontSize: 14, fontWeight: 600, padding: "11px 22px", borderRadius: 10, textDecoration: "none", border: `1.5px solid ${COLORS.kutircharGreen}` }}>
-            Contact Us
-          </Link>
+    <div>
+      <PageHero
+        title={T("notFound.title")}
+        subtitle={T("notFound.body")}
+      />
+      <PageSection>
+        <div style={{ textAlign: "center" }}>
+          <CtaButton to="/" variant="primary" size="lg">{T("notFound.cta")} →</CtaButton>
         </div>
-      </div>
+      </PageSection>
     </div>
   );
 }

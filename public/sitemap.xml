@@ -1,58 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://sysmoai.github.io/KutircharEcoFarm/</loc>
+    <loc>https://kutircharecofarm.com/</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://kutircharecofarm.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://kutircharecofarm.com/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kutircharecofarm.com/" />
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://sysmoai.github.io/KutircharEcoFarm/project</loc>
+    <loc>https://kutircharecofarm.com/project</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sysmoai.github.io/KutircharEcoFarm/proof</loc>
+    <loc>https://kutircharecofarm.com/proof</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sysmoai.github.io/KutircharEcoFarm/ecosystem</loc>
+    <loc>https://kutircharecofarm.com/ecosystem</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sysmoai.github.io/KutircharEcoFarm/products</loc>
+    <loc>https://kutircharecofarm.com/products</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sysmoai.github.io/KutircharEcoFarm/digital</loc>
+    <loc>https://kutircharecofarm.com/digital</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sysmoai.github.io/KutircharEcoFarm/updates</loc>
+    <loc>https://kutircharecofarm.com/updates</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sysmoai.github.io/KutircharEcoFarm/contact</loc>
+    <loc>https://kutircharecofarm.com/contact</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sysmoai.github.io/KutircharEcoFarm/faq</loc>
+    <loc>https://kutircharecofarm.com/faq</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sysmoai.github.io/KutircharEcoFarm/privacy</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://kutircharecofarm.com/privacy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://sysmoai.github.io/KutircharEcoFarm/executive-summary</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://kutircharecofarm.com/executive-summary</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

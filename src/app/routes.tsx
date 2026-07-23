@@ -30,5 +30,4 @@ export const router = createBrowserRouter([
     { path: "brand-guide", Component: BrandGuidePage },
     { path: "*", Component: NotFound },
   ]}],
-  { basename: "/KutircharEcoFarm" }
 );

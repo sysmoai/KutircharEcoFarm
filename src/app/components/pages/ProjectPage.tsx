@@ -1,80 +1,48 @@
 import { COLORS, FONTS, BRAND } from "../../brand";
 import { PageHero, PageSection, SectionHeading, PhaseItem, InfoRow, CtaButton, StopRule } from "../shared/Shared";
+import { useT } from "../shared/i18n";
 
 const phases = [
-  { phase: "Phase 0", label: "Current", title: "Verification & Foundation", active: true, items: [
-    "Land document index & legal review",
-    "Boundary survey (Zone A & B demarcation)",
-    "SPT soil test for foundation planning",
-    "Drainage outlet survey & level mapping",
-    "Zone B ejmali status legal clarification",
-    "Digital infrastructure planning (Starlink, CCTV, UPS)",
-  ]},
-  { phase: "Phase 1", label: "Next", title: "Hygienic Pilot Farm + Small Solar", active: false, items: [
-    "Hygienic cattle barn on Zone A (gate: all Phase 0 docs verified)",
-    "First 2–3 local cows with Napier fodder cultivation",
-    "Small rooftop solar (100–200W) for operations",
-    "Basic CCTV installation & connectivity test",
-    "Compost/vermicompost pilot",
-  ]},
-  { phase: "Phase 2", label: "Next", title: "Bio-Slurry & Silage Loop", active: false, items: [
-    "Compost processing from first batch (gate: livestock stable)",
-    "Napier silage first surplus storage",
-    "Bio-slurry liquid fertilizer production trial",
-    "Local vegetable inputs from bio-slurry output",
-  ]},
-  { phase: "Phase 3", label: "Later", title: "6m³ Biogas + Expanded Solar", active: false, items: [
-    "6m³ biogas digester installation (gate: consistent manure input)",
-    "Cooking gas for farm use — reduce LPG cost",
-    "Expand rooftop solar (500W–1kW)",
-    "Irrigation pump — gravity or solar",
-    "Silage field expansion to adjacent Napier plots",
-  ]},
-  { phase: "Phase 4", label: "Later", title: "Scale & Monetization", active: false, items: [
-    "Larger biogas system (gate: Phase 3 stable for 3+ months)",
-    "Bio-slurry commercial sale to local farmers",
-    "Silage surplus bulk sale",
-    "Training/farm tour programme (gate: digital monitoring live)",
-  ]},
-  { phase: "Phase 5", label: "Later", title: "Demand-Gated Services", active: false, items: [
-    "Service apartment (gate: verified demand + legal clearance)",
-    "Brand licensing and franchise consultancy",
-    "Smart monitoring demo for partner farms",
-    "All Phase 5 items require explicit proof from Phases 0–4",
-  ]},
+  { phase: "phaseLabels.phase0", label: "phaseLabels.current", titleKey: "phaseLabels.phase0Title", active: true, items: ["phaseLabels.p0i1","phaseLabels.p0i2","phaseLabels.p0i3","phaseLabels.p0i4","phaseLabels.p0i5","phaseLabels.p0i6"] },
+  { phase: "phaseLabels.phase1", label: "phaseLabels.next", titleKey: "phaseLabels.phase1Title", active: false, items: ["phaseLabels.p1i1","phaseLabels.p1i2","phaseLabels.p1i3","phaseLabels.p1i4","phaseLabels.p1i5"] },
+  { phase: "phaseLabels.phase2", label: "phaseLabels.next", titleKey: "phaseLabels.phase2Title", active: false, items: ["phaseLabels.p2i1","phaseLabels.p2i2","phaseLabels.p2i3","phaseLabels.p2i4"] },
+  { phase: "phaseLabels.phase3", label: "phaseLabels.later", titleKey: "phaseLabels.phase3Title", active: false, items: ["phaseLabels.p3i1","phaseLabels.p3i2","phaseLabels.p3i3","phaseLabels.p3i4","phaseLabels.p3i5"] },
+  { phase: "phaseLabels.phase4", label: "phaseLabels.later", titleKey: "phaseLabels.phase4Title", active: false, items: ["phaseLabels.p4i1","phaseLabels.p4i2","phaseLabels.p4i3","phaseLabels.p4i4"] },
+  { phase: "phaseLabels.phase5", label: "phaseLabels.later", titleKey: "phaseLabels.phase5Title", active: false, items: ["phaseLabels.p5i1","phaseLabels.p5i2","phaseLabels.p5i3","phaseLabels.p5i4"] },
 ];
 
 export function ProjectPage() {
+  const T = useT();
   return (
     <div>
       <PageHero
-        title="The Project — Overview"
-        titleBn="প্রকল্প পরিচিতি"
-        subtitle="Kutirchar EcoFarm is a proof-based smart farm and circular energy ecosystem in Kutirchar, Sirajganj. Every phase is gated by evidence. No phase begins without documented proof from the previous stage."
+        title={T("project.heroTitle")}
+        titleBn={T("brand.nameBn")}
+        subtitle={T("project.heroSubtitle")}
       />
 
       {/* What & Why */}
       <PageSection>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 40 }}>
           <div>
-            <SectionHeading title="What is Kutirchar EcoFarm?" />
+            <SectionHeading title={T("project.whatIsTitle")} />
             <p style={{ fontFamily: FONTS.sans, fontSize: 15, color: "#444", lineHeight: 1.75, margin: "0 0 14px" }}>
-              A rural circular ecosystem in Kutirchar, Bhadraghat, Kamarkhanda, Sirajganj. The project integrates cattle and dairy farming, biogas production from manure, Napier grass cultivation for silage and fodder, bio-slurry fertilizer, rooftop solar power, and digital farm monitoring — all on private family land.
+              {T("project.whatIsDesc1")}
             </p>
             <p style={{ fontFamily: FONTS.sans, fontSize: 15, color: "#444", lineHeight: 1.75, margin: "0 0 14px" }}>
-              The circular loop: livestock produce manure → manure feeds biogas → biogas gives energy + bio-slurry → bio-slurry fertilizes Napier → Napier feeds livestock. Each output reduces cost. Each cycle builds asset value.
+              {T("project.whatIsDesc2")}
             </p>
             <StopRule>
-              Zone B (12 decimal non-private/ejmali land): removable use only — fodder racks, temporary shade, portable compost, water tank. No permanent concrete structures until legal verification is complete.
+              {T("project.zoneBRule")}
             </StopRule>
           </div>
           <div>
-            <SectionHeading title="Why this project exists" />
+            <SectionHeading title={T("project.whyTitle")} />
             {[
-              { heading: "Rural asset protection first", body: "Family land in Kutirchar represents long-term asset value. Proper documentation, boundary survey, and legal clarity must come before any construction." },
-              { heading: "Phased monetization", body: "Instead of large upfront investment, each phase is self-funded from the output of the previous phase. No phase moves forward without verified proof." },
-              { heading: "Strong governance & audit gates", body: "Every decision has a stop rule. Soil test before foundation. Boundary survey before permanent works. Income proof before EMI expansion." },
-              { heading: "Evidence-first, not hype", body: "All public claims are conservative and verifiable. No overpromising. Bank officers and government stakeholders are the primary audience for all documentation." },
+              { heading: T("project.why1Heading"), body: T("project.why1Body") },
+              { heading: T("project.why2Heading"), body: T("project.why2Body") },
+              { heading: T("project.why3Heading"), body: T("project.why3Body") },
+              { heading: T("project.why4Heading"), body: T("project.why4Body") },
             ].map((item) => (
               <div key={item.heading} style={{ marginBottom: 18 }}>
                 <p style={{ fontFamily: FONTS.sans, fontSize: 14, fontWeight: 700, color: COLORS.kutircharGreen, margin: "0 0 4px" }}>{item.heading}</p>
@@ -85,32 +53,52 @@ export function ProjectPage() {
         </div>
       </PageSection>
 
+      {/* Bangladesh Dairy Context */}
+      <PageSection bg={COLORS.fieldMist}>
+        <SectionHeading title={T("project.bdDairyContext")} subtitle={T("project.bdDairyDesc")} />
+      </PageSection>
+
+      {/* Climate Adaptation Plan */}
+      <PageSection>
+        <SectionHeading title={T("project.bdClimatePlan")} subtitle={T("project.bdClimatePlanDesc")} />
+      </PageSection>
+
+      {/* Community Impact */}
+      <PageSection bg={COLORS.fieldMist}>
+        <SectionHeading title={T("project.bdCommunityImpact")} subtitle={T("project.bdCommunityImpactDesc")} />
+      </PageSection>
+
+      {/* Food Security */}
+      <PageSection>
+        <SectionHeading title={T("project.bdFoodSecurity")} subtitle={T("project.bdFoodSecurityDesc")} />
+      </PageSection>
+
       {/* Location */}
       <PageSection bg={COLORS.fieldMist}>
-        <SectionHeading title="Project Location" subtitle="All operations are based at Kutirchar village. Site visits available by appointment." />
+        <SectionHeading title={T("project.locationTitle")} subtitle={T("project.locationSubtitle")} />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
           <div style={{ background: "white", borderRadius: 12, padding: "24px", border: "1px solid #e5eee9" }}>
             {[
-              { label: "Village", value: BRAND.location.village },
-              { label: "Union", value: BRAND.location.union },
-              { label: "Upazila", value: BRAND.location.upazila },
-              { label: "District", value: BRAND.location.district },
-              { label: "Country", value: BRAND.location.country },
-              { label: "Zone A", value: BRAND.zoneA },
-              { label: "Zone B", value: BRAND.zoneB },
+              { label: T("common.village"), value: BRAND.location.village },
+              { label: T("common.union"), value: BRAND.location.union },
+              { label: T("common.upazila"), value: BRAND.location.upazila },
+              { label: T("common.district"), value: BRAND.location.district },
+              { label: T("common.country"), value: BRAND.location.country },
+              { label: T("common.zoneA"), value: BRAND.zoneA },
+              { label: T("common.zoneB"), value: BRAND.zoneB },
             ].map((row) => <InfoRow key={row.label} label={row.label} value={row.value} />)}
           </div>
           <div style={{ background: COLORS.deepFarmGreen, borderRadius: 12, padding: "24px", color: "white" }}>
             <p style={{ fontFamily: FONTS.sans, fontSize: 12, color: "rgba(255,255,255,0.72)", marginBottom: 12, fontWeight: 700, textTransform: "uppercase" as const, letterSpacing: "0.08em" }}>
-              Land Status Summary
+              {T("project.landStatusTitle")}
             </p>
             {[
-              { item: "Zone A land documents — under review", done: false },
-              { item: "Zone A boundary survey", done: false },
-              { item: "Zone A SPT soil test", done: false },
-              { item: "Zone B ejmali legal status", done: false },
-              { item: "Zone B removable-use approval", done: false },
-              { item: "Post office address verification", done: false },
+              { item: T("project.landStatus1"), done: false },
+              { item: T("project.landStatus2"), done: false },
+              { item: T("project.landStatus3"), done: false },
+              { item: T("project.landStatus4"), done: false },
+              { item: T("project.landStatus5"), done: false },
+              { item: T("project.landStatus6"), done: false },
             ].map((s) => (
               <div key={s.item} style={{ display: "flex", gap: 10, alignItems: "center", padding: "6px 0", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
                 <span style={{ color: s.done ? "#4ade80" : "#f87171", fontWeight: 700, fontSize: 13, flexShrink: 0 }}>{s.done ? "✓" : "○"}</span>
@@ -124,26 +112,26 @@ export function ProjectPage() {
       {/* Phase Roadmap */}
       <PageSection>
         <SectionHeading
-          title="Phase Roadmap"
-          subtitle="Six phases from verification to scale. Each phase requires documented evidence from the previous before proceeding. No skipping."
+          title={T("project.roadmapTitle")}
+          subtitle={T("project.roadmapSubtitle")}
         />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20, marginBottom: 28 }}>
-          {phases.map((p) => <PhaseItem key={p.phase} {...p} />)}
+          {phases.map((p) => <PhaseItem key={p.phase} phase={T(p.phase)} label={T(p.label)} title={T(p.titleKey)} items={p.items.map((i) => T(i))} active={p.active} />)}
         </div>
         <StopRule>
-          This roadmap is illustrative. Phase 1 does not begin until all Phase 0 verification items are completed and documented. Phase 2 does not begin until Phase 1 outputs are stable for a minimum observation period.
+          {T("project.roadmapStopRule")}
         </StopRule>
       </PageSection>
 
       {/* Positioning */}
       <PageSection bg={COLORS.fieldMist}>
-        <SectionHeading title="Brand Positioning" subtitle="Who this project is for — and what it is not." center />
+        <SectionHeading title={T("project.positioningTitle")} subtitle={T("project.positioningSubtitle")} center />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
           {[
-            { title: "Bank & Credit Officers", body: "Clear land documentation, phase-gated investment, verifiable income progression, conservative EMI discipline, and stop-rule governance.", icon: "🏦" },
-            { title: "Government & Agriculture Dept.", body: "Proof-based circular farm model, soil and water verification first, biogas subsidy eligibility in later phases.", icon: "🏛️" },
-            { title: "NGO & Development Partners", body: "Rural livelihood integration, food security (silage, organic fertilizer), circular energy, local employment.", icon: "🌍" },
-            { title: "Serious Investors", body: "Asset-backed (family land), conservative phase progression, no hype, verifiable output at each stage.", icon: "📊" },
+            { title: T("project.pos1Title"), body: T("project.pos1Body"), icon: "🏦" },
+            { title: T("project.pos2Title"), body: T("project.pos2Body"), icon: "🏛️" },
+            { title: T("project.pos3Title"), body: T("project.pos3Body"), icon: "🌍" },
+            { title: T("project.pos4Title"), body: T("project.pos4Body"), icon: "📊" },
           ].map((item) => (
             <div key={item.title} style={{ background: "white", border: "1px solid #e5eee9", borderRadius: 12, padding: "20px" }}>
               <div style={{ fontSize: 28, marginBottom: 10 }}>{item.icon}</div>
@@ -153,7 +141,7 @@ export function ProjectPage() {
           ))}
         </div>
         <div style={{ textAlign: "center", marginTop: 32 }}>
-          <CtaButton to="/proof" size="lg">View Proof &amp; Governance Pack →</CtaButton>
+          <CtaButton to="/proof" size="lg">{T("project.ctaProof")}</CtaButton>
         </div>
       </PageSection>
     </div>
