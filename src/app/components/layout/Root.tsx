@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Outlet, NavLink, Link, useLocation } from "react-router";
+import { Outlet, NavLink, Link, useLocation, useNavigate } from "react-router";
 import logoIcon from "../../../imports/image.png";
 import { BRAND, COLORS, FONTS } from "../../brand";
 
@@ -18,8 +18,23 @@ export function Root() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => { setMenuOpen(false); }, [pathname]);
+
+  // GitHub Pages SPA fallback: restore route from 404.html redirect
+  useEffect(() => {
+    const redirect = sessionStorage.getItem('redirect');
+    if (redirect) {
+      sessionStorage.removeItem('redirect');
+      const url = new URL(redirect);
+      // Only navigate if the path is different from the current root
+      if (url.pathname !== '/KutircharEcoFarm/' && url.pathname !== '/KutircharEcoFarm') {
+        const route = url.pathname.replace('/KutircharEcoFarm', '') || '/';
+        navigate(route, { replace: true });
+      }
+    }
+  }, [navigate]);
 
   // Close the mobile menu on Escape (standard keyboard expectation)
   useEffect(() => {
