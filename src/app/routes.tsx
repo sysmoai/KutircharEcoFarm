@@ -29,4 +29,6 @@ export const router = createBrowserRouter([
     { path: "executive-summary", Component: ExecSummaryPage },
     { path: "brand-guide", Component: BrandGuidePage },
     { path: "*", Component: NotFound },
-  ]}]);
+  ]}],
+  { basename: "/KutircharEcoFarm" }
+);
