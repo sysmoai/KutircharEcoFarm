@@ -21,4 +21,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: dist
-          cname: kutircharecofarm.com
+          # CNAME removed — custom domain kutircharecofarm.com not yet configured
+          # in GitHub Pages settings. Re-add when DNS is set up.
+          # cname: kutircharecofarm.com

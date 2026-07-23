@@ -17,6 +17,9 @@ function figmaAssetResolver() {
 }
 
 export default defineConfig({
+  // GitHub Pages serves from /KutircharEcoFarm/ — set base to match.
+  // When the custom domain kutircharecofarm.com is active, change to base: '/'
+  base: '/KutircharEcoFarm/',
   plugins: [
     figmaAssetResolver(),
     // The React and Tailwind plugins are both required for Make, even if
