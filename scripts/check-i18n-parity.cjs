@@ -1,0 +1,1 @@
+const fs=require("fs");const en=JSON.parse(fs.readFileSync("src/i18n/en.json","utf8"));const bn=JSON.parse(fs.readFileSync("src/i18n/bn.json","utf8"));console.log("EN top keys:",Object.keys(en).join(","));console.log("BN top keys:",Object.keys(bn).join(","));console.log("Match:",JSON.stringify(Object.keys(en).sort())===JSON.stringify(Object.keys(bn).sort())?"YES":"NO");
