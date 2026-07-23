@@ -8,6 +8,8 @@
 **Website:** kutircharecofarm.com · kutircharecofarm.bd  
 **Contact:** info@kutircharecofarm.com  
 
+[![Deploy on Replit](https://replit.com/badge/github/sysmoai/KutircharEcoFarm)](https://replit.com/new/github/sysmoai/KutircharEcoFarm)  
+
 ---
 
 ## What This Is
@@ -66,12 +68,18 @@ This repository is specifically architected to be maintained, scaled, and built 
 
 ## Quick Start
 
+### On Replit (recommended)
+Click the badge above to import this repo into Replit. It will auto-configure and run the dev server.
+
+### Locally
 ```bash
-pnpm install
-pnpm run dev
+git clone https://github.com/sysmoai/KutircharEcoFarm.git
+cd KutircharEcoFarm
+npm install
+npm run dev
 ```
 
-> Uses pnpm. Do not use npm or yarn.
+> Uses npm. Replit auto-detects the config from `.replit`.
 
 ---
 

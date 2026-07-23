@@ -1,0 +1,11 @@
+run = "npm run dev"
+
+[deployment]
+run = ["sh", "-c", "npm run build && npx serve -s dist -l 443"]
+
+[[ports]]
+localPort = 5173
+externalPort = 80
+
+[nix]
+channel = "stable-24_05"
