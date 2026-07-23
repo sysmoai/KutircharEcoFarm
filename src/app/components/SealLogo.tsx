@@ -1,4 +1,4 @@
-import logoIcon from "../../imports/image.png";
+import logoIcon from "../../imports/image.webp";
 import { BRAND } from "../brand";
 
 // ─── Types ──────────────────────────────────────────────────────────────────

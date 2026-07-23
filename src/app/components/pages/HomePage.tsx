@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import logoIcon from "../../../imports/image.png";
+import logoIcon from "../../../imports/image.webp";
 import { COLORS, FONTS } from "../../brand";
 import { PhaseChip } from "../shared/PhaseChip";
 import { PageSection, Card, StopRule, CtaButton } from "../shared/Shared";

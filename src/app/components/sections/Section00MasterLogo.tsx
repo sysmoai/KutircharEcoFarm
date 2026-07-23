@@ -1,5 +1,5 @@
 import * as React from "react";
-import logoIcon from "../../../imports/image.png";
+import logoIcon from "../../../imports/image.webp";
 
 export function Section00MasterLogo() {
   const sizes = [256, 128, 64, 48, 32, 16];

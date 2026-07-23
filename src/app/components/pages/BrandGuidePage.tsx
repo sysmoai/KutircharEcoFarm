@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useEffect, useRef } from "react";
 import { Link, useSearchParams } from "react-router";
-import logoIcon from "../../../imports/image.png";
+import logoIcon from "../../../imports/image.webp";
 import { COLORS, FONTS } from "../../brand";
 
 // ── Import all 14 brand guide sections ──────────────────────────────────────

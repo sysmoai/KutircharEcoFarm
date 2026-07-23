@@ -1,6 +1,6 @@
 import { useState, useCallback, type ReactNode } from "react";
 import { BRAND } from "../../brand";
-import logoIcon from "../../../imports/image.png";
+import logoIcon from "../../../imports/image.webp";
 import { SectionHeader, Card } from "./Section00MasterLogo";
 
 // ─── Core Utilities ──────────────────────────────────────────────────────────

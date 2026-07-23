@@ -1,4 +1,4 @@
-import logoIcon from "../../imports/image.png";
+import { LogoPicture } from "./LogoPicture";
 import { BRAND } from "../brand";
 
 export interface BrandLogoProps {
@@ -59,8 +59,7 @@ export function BrandLogo({
 
   // ── Icon ──────────────────────────────────────────────────────────────────
   const iconEl = (
-    <img
-      src={logoIcon}
+    <LogoPicture
       alt="Kutirchar EcoFarm icon"
       style={{
         width: iconSize,
@@ -72,7 +71,7 @@ export function BrandLogo({
         opacity: mode === "watermark" ? 0.10 : undefined,
         flexShrink: 0,
         display: "block",
-      }}
+      } as React.CSSProperties}
     />
   );
 

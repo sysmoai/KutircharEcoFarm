@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Outlet, NavLink, Link, useLocation, useNavigate } from "react-router";
-import logoIcon from "../../../imports/image.png";
+import logoIcon from "../../../imports/image.webp";
 import { BRAND, COLORS, FONTS } from "../../brand";
 
 const navItems = [

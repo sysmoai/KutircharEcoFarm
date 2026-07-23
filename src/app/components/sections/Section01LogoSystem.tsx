@@ -1,7 +1,7 @@
 import * as React from "react";
 import { BrandLogo } from "../BrandLogo";
 import { SectionHeader, Card } from "./Section00MasterLogo";
-import logoIcon from "../../../imports/image.png";
+import logoIcon from "../../../imports/image.webp";
 
 export function Section01LogoSystem() {
   return (

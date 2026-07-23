@@ -1,4 +1,4 @@
-import logoIcon from "../../../imports/image.png";
+import logoIcon from "../../../imports/image.webp";
 import { SectionHeader, Card } from "./Section00MasterLogo";
 
 export function Section06ClearSpace() {
