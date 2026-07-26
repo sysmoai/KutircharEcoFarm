@@ -5,9 +5,9 @@ export const BRAND = {
   nameEn:    "Kutirchar EcoFarm",
   nameBn:    "কুটিরচর ইকোফার্ম",
   owner:     "Emon Hossain",
-  tagline:   "Smart Cattle & Circular Energy Ecosystem",
-  shortDesc: "Dairy · Biogas · Solar · Silage",
-  phase:     "Verification & Foundation Phase",
+  tagline:   "AI-Driven Goat Nucleus & Circular Energy Ecosystem",
+  shortDesc: "AI Breed Improvement · Goat-First · Biogas · Solar · Silage",
+  phase:     "Verification and Foundation Phase",
   location: {
     village:  "Kutirchar",
     union:    "Bhadraghat",
