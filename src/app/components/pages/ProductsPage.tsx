@@ -1,5 +1,5 @@
 import { COLORS, FONTS } from "../../brand";
-import { PageHero, PageSection, Card, StopRule, CtaButton } from "../shared/Shared";
+import { PageHero, PageSection, Card, StopRule, CtaButton, SectionHeading } from "../shared/Shared";
 import { PhaseChip } from "../shared/PhaseChip";
 import { useT } from "../shared/i18n";
 
