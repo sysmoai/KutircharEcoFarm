@@ -1,6 +1,5 @@
-import React from "react";
 import { COLORS, FONTS } from "../../brand";
-import { PageHero, PageSection, SectionHeading } from "../shared/Shared";
+import { PageHero, PageSection } from "../shared/Shared";
 import { useT } from "../shared/i18n";
 
 export function PrivacyPage() {
