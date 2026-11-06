@@ -1,5 +1,3 @@
-import React from "react";
-import { COLORS, FONTS } from "../../brand";
 import { PageHero, PageSection, CtaButton } from "../shared/Shared";
 import { useT } from "../shared/i18n";
 

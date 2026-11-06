@@ -1,5 +1,5 @@
 import { COLORS, FONTS } from "../../brand";
-import { PageHero, PageSection, SectionHeading, Card, CtaButton } from "../shared/Shared";
+import { PageHero, PageSection, SectionHeading, CtaButton } from "../shared/Shared";
 import { useT } from "../shared/i18n";
 
 export function HomePage() {

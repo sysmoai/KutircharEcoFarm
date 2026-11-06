@@ -82,7 +82,7 @@ export function t(path: string, locale: Locale): string {
 
 // Use inside components: useT()("home.heroTitle")
 export function useT() {
-  const { locale, t: data } = useLocale();
+  const { t: data } = useLocale();
   return (path: string): string => {
     const keys = path.split(".");
     let val: any = data;
